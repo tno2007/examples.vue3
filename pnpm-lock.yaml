@@ -1,6 +1,8 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@formkit/themes': ^1.0.0-beta.8
+  '@formkit/vue': ^1.0.0-beta.8
   '@rushstack/eslint-patch': ^1.1.0
   '@types/jsdom': ^16.2.14
   '@types/node': ^16.11.36
@@ -15,6 +17,7 @@ specifiers:
   npm-run-all: ^4.1.5
   pinia: ^2.0.14
   prettier: ^2.5.1
+  scripty: ^2.1.0
   typescript: ~4.7.2
   vite: ^2.9.9
   vitest: ^0.13.0
@@ -23,6 +26,8 @@ specifiers:
   vue-tsc: ^0.35.2
 
 dependencies:
+  '@formkit/themes': 1.0.0-beta.8
+  '@formkit/vue': 1.0.0-beta.8_vue@3.2.37
   pinia: 2.0.14_typescript@4.7.3+vue@3.2.37
   vue: 3.2.37
   vue-router: 4.0.16_vue@3.2.37
@@ -41,6 +46,7 @@ devDependencies:
   jsdom: 19.0.0
   npm-run-all: 4.1.5
   prettier: 2.6.2
+  scripty: 2.1.0
   typescript: 4.7.3
   vite: 2.9.10
   vitest: 0.13.1_jsdom@19.0.0
@@ -69,6 +75,92 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /@formkit/core/1.0.0-beta.8:
+    resolution: {integrity: sha512-oHOfdKM0DX4gwxdzwdYHjmb02v62A/zR+eVVhGLes14ObhGvW9HD1mQqUgMZRKB5mEvgu6262v0nTcXZTFlEPQ==}
+    dependencies:
+      '@formkit/utils': 1.0.0-beta.8
+    dev: false
+
+  /@formkit/dev/1.0.0-beta.8:
+    resolution: {integrity: sha512-ZlEpPBmxwvdvXlUoY7Cmon1lrflBB3/wg80/6LT5vlkWBswk9BSbRlk+hwYko8xYH6TDA4s6r1jcYOObNYTkGw==}
+    dependencies:
+      '@formkit/core': 1.0.0-beta.8
+      '@formkit/utils': 1.0.0-beta.8
+    dev: false
+
+  /@formkit/i18n/1.0.0-beta.8:
+    resolution: {integrity: sha512-hMnXdv2zobkEMUxJba40RY3pm4pAevQGgZe3PUniujdHxlK0h+RgqIIbhWroAf4qP1RPOOy9RZdOgVJw3qNYEA==}
+    dependencies:
+      '@formkit/core': 1.0.0-beta.8
+      '@formkit/utils': 1.0.0-beta.8
+      '@formkit/validation': 1.0.0-beta.8
+    dev: false
+
+  /@formkit/inputs/1.0.0-beta.8:
+    resolution: {integrity: sha512-cmIVxU2WQMqneKN6ZIxN6mfAGEi2xDt/H9tNZCumz4/Zvgau75zu4+E9lT/ptexCeWKe1hUjSrOutTDKWJ/JGw==}
+    dependencies:
+      '@formkit/core': 1.0.0-beta.8
+    dev: false
+
+  /@formkit/observer/1.0.0-beta.8:
+    resolution: {integrity: sha512-e7BFqWG+XOAnTHECe0QRvOmQGNGsTz2vw8yQayDk4DmxrvZ/DPO8js6mhQ18t2CdnsZaFg2ETnW7n4hFAfAZXQ==}
+    dependencies:
+      '@formkit/core': 1.0.0-beta.8
+      '@formkit/utils': 1.0.0-beta.8
+    dev: false
+
+  /@formkit/rules/1.0.0-beta.8:
+    resolution: {integrity: sha512-0or3seb3xuw7Gz3fAedXmo5iJz/0elYLQ0XOoxhNAlmg7o691VwJCVf49l5pdHjTF8Fbu5SnNAENOar4oroyCQ==}
+    dependencies:
+      '@formkit/core': 1.0.0-beta.8
+      '@formkit/utils': 1.0.0-beta.8
+      '@formkit/validation': 1.0.0-beta.8
+    dev: false
+
+  /@formkit/themes/1.0.0-beta.8:
+    resolution: {integrity: sha512-/dXgO37caePqqDgoE/E4/UYhbyOms5VRu4iagsgIGdhs/WTcZsUUeIFrPTavcRXzzFh/kmoMYe2PoP+sQyYTgw==}
+    peerDependencies:
+      tailwindcss: ^3.0.0
+      unocss: ^0.31.0
+      windicss: ^3.0.0
+    peerDependenciesMeta:
+      tailwindcss:
+        optional: true
+      unocss:
+        optional: true
+      windicss:
+        optional: true
+    dependencies:
+      '@formkit/core': 1.0.0-beta.8
+    dev: false
+
+  /@formkit/utils/1.0.0-beta.8:
+    resolution: {integrity: sha512-ahAHFJBGIJvNWGuIQuAwUceblzKWO+c5MrNMQa3Xcl/CJtKQSgscSVcj2aZvV1KRUKxKZh3Ou73zrWK28SNFGw==}
+    dev: false
+
+  /@formkit/validation/1.0.0-beta.8:
+    resolution: {integrity: sha512-gwfclfozBt6QdpYF3KdT823VKK261of8HwEVLHnYFUyEOFRjROjqWrnRdDJsC0GkQb6rWNJZZJciv9/RRo7ifQ==}
+    dependencies:
+      '@formkit/core': 1.0.0-beta.8
+      '@formkit/observer': 1.0.0-beta.8
+    dev: false
+
+  /@formkit/vue/1.0.0-beta.8_vue@3.2.37:
+    resolution: {integrity: sha512-KuWGKcSwrdkvaeuBB40kAyBzEoIGDTehcrmF0MfhMkalphZHvotR/jBzIymx9zxMWxU6traEtQ2V/d+1Kov0IQ==}
+    peerDependencies:
+      vue: ^3.2.1
+    dependencies:
+      '@formkit/core': 1.0.0-beta.8
+      '@formkit/dev': 1.0.0-beta.8
+      '@formkit/i18n': 1.0.0-beta.8
+      '@formkit/inputs': 1.0.0-beta.8
+      '@formkit/observer': 1.0.0-beta.8
+      '@formkit/rules': 1.0.0-beta.8
+      '@formkit/utils': 1.0.0-beta.8
+      '@formkit/validation': 1.0.0-beta.8
+      vue: 3.2.37
+    dev: false
 
   /@humanwhocodes/config-array/0.9.5:
     resolution: {integrity: sha512-ObyMyWxZiCu/yTisA7uzx81s40xR2fD5Cg/2Kq7G02ajkNubJf6BopgDTmDyc3U7sXpNKM8cYOw7s7Tyr+DnCw==}
@@ -528,6 +620,12 @@ packages:
 
   /assertion-error/1.1.0:
     resolution: {integrity: sha512-jgsaNduz+ndvGyFt3uSuWqvy4lCnIJiovtouQN5JZHOKCS2QuhEdbcQHFhVksz2N2U9hXJo8odG7ETyWlEeuDw==}
+    dev: true
+
+  /async/2.6.4:
+    resolution: {integrity: sha512-mzo5dfJYwAn29PeiJ0zvwTo04zj8HDJj0Mn8TD7sno7q12prdbnasKJHhkm2c1LgrhlJ0teaea8860oxi51mGA==}
+    dependencies:
+      lodash: 4.17.21
     dev: true
 
   /asynckit/0.4.0:
@@ -2012,9 +2110,21 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
+  /resolve-from/2.0.0:
+    resolution: {integrity: sha512-qpFcKaXsq8+oRoLilkwyc7zHGF5i9Q2/25NIgLQQ/+VVv9rU4qvr6nXVAw1DsnXJyQkZsR4Ytfbtg5ehfcUssQ==}
+    engines: {node: '>=0.10.0'}
+    dev: true
+
   /resolve-from/4.0.0:
     resolution: {integrity: sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g==}
     engines: {node: '>=4'}
+    dev: true
+
+  /resolve-pkg/1.0.0:
+    resolution: {integrity: sha512-L0/+vjdV3UjcQaXRlQcObpCyySS8GEqVNYGYRDAGlYOcw4J1y33WMIAD3XvYWIPnBeyN5Ilp5RHoifs3gR1S2g==}
+    engines: {node: '>=4'}
+    dependencies:
+      resolve-from: 2.0.0
     dev: true
 
   /resolve/1.22.0:
@@ -2061,6 +2171,16 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       xmlchars: 2.2.0
+    dev: true
+
+  /scripty/2.1.0:
+    resolution: {integrity: sha512-vvp8DWmLyIyesQYjxTh5cH3odsf1+srXKJUhrgXjhEk32RqcGkjqTEuKLyBCoBH4k6WdzF2uYpr4zi6ih4xgOA==}
+    hasBin: true
+    dependencies:
+      async: 2.6.4
+      glob: 7.2.3
+      lodash: 4.17.21
+      resolve-pkg: 1.0.0
     dev: true
 
   /semver/5.7.1:

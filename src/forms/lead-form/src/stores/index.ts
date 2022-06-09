@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 
-export const useCounterStore = defineStore({
+export const useFormStore = defineStore({
   id: "counter",
   state: () => ({
     counter: 0,
