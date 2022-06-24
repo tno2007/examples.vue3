@@ -1,11 +1,25 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { RouterLink, RouterView } from "vue-router";
-import HelloWorld from "@/components/HelloWorld.vue";
+import { onMounted, reactive, ref } from "vue";
+import autoAnimate from "@formkit/auto-animate";
 
-const data = ref({});
+const formContainer = ref();
+const fieldset = ref();
 
-const schema = [
+const register = () => {};
+
+const data = reactive({
+  checked: false,
+});
+
+onMounted(() => {
+  formContainer.value.querySelectorAll(".formkit-outer").forEach(autoAnimate);
+
+  autoAnimate(formContainer.value);
+  autoAnimate(fieldset.value);
+});
+
+const formData = ref({});
+const formSchema = [
   {
     $formkit: "text",
     name: "firstname",
@@ -55,9 +69,16 @@ const schema = [
 </script>
 
 <template>
-  <FormKit type="form" v-model="data" @submit="register">
-    <FormKitSchema :schema="schema" />
-  </FormKit>
+  <div ref="formContainer">
+    <FormKit type="form" v-model="formData" @submit="register">
+      <FormKitSchema :schema="formSchema" />
+    </FormKit>
+  </div>
+
+  <div ref="fieldset">
+    <input type="checkbox" v-model="data.checked" class="d-block" />
+    <input v-if="data.checked" type="text" name="" id="" />
+  </div>
 </template>
 
 <style></style>

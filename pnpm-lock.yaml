@@ -1,6 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@formkit/auto-animate': ^1.0.0-beta.1
   '@formkit/themes': ^1.0.0-beta.8
   '@formkit/vue': ^1.0.0-beta.8
   '@rushstack/eslint-patch': ^1.1.0
@@ -26,6 +27,7 @@ specifiers:
   vue-tsc: ^0.35.2
 
 dependencies:
+  '@formkit/auto-animate': 1.0.0-beta.1_vue@3.2.37
   '@formkit/themes': 1.0.0-beta.8
   '@formkit/vue': 1.0.0-beta.8_vue@3.2.37
   pinia: 2.0.14_typescript@4.7.3+vue@3.2.37
@@ -75,6 +77,20 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /@formkit/auto-animate/1.0.0-beta.1_vue@3.2.37:
+    resolution: {integrity: sha512-I3OWOBaPZKSJL4bsooXI8kC3q7bcgibD2oML0P/Lir6MnbvUe/0/7EH8br024juvM/Ulm9C9xGx9CJUQYrOWSA==}
+    peerDependencies:
+      react: ^16.8.0
+      vue: ^3.0.0
+    peerDependenciesMeta:
+      react:
+        optional: true
+      vue:
+        optional: true
+    dependencies:
+      vue: 3.2.37
+    dev: false
 
   /@formkit/core/1.0.0-beta.8:
     resolution: {integrity: sha512-oHOfdKM0DX4gwxdzwdYHjmb02v62A/zR+eVVhGLes14ObhGvW9HD1mQqUgMZRKB5mEvgu6262v0nTcXZTFlEPQ==}

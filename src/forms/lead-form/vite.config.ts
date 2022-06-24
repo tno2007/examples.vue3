@@ -1,4 +1,4 @@
-import { fileURLToPath, URL } from "url";
+import { fileURLToPath } from "url";
 
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
@@ -11,5 +11,4 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
-  root: "src/forms/lead-form",
 });

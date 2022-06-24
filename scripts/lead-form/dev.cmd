@@ -1,1 +1,1 @@
-pnpm vite --config ./src/forms/lead-form/vite.config.ts
+pnpm vite ./src/forms/lead-form
