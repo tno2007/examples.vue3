@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { onMounted, reactive, ref } from "vue";
-import autoAnimate from "@formkit/auto-animate";
 
 const formContainer = ref();
 const fieldsetRef = ref();
@@ -11,12 +10,7 @@ const data = reactive({
   checked: false,
 });
 
-onMounted(() => {
-  formContainer.value.querySelectorAll(".formkit-outer").forEach(autoAnimate);
-
-  autoAnimate(formContainer.value);
-  autoAnimate(fieldsetRef.value);
-});
+onMounted(() => {});
 
 const formData = ref({});
 const formSchema = [
