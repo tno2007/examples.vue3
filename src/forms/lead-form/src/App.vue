@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onMounted, reactive, ref } from "vue";
+//import {  } from "@formkit/vue";
 
 const formContainer = ref();
 const fieldsetRef = ref();
@@ -10,10 +11,11 @@ const data = reactive({
   checked: false,
 });
 
-onMounted(() => {});
-
-const formData = ref({});
-const formSchema = [
+const formData = ref({
+  email: "lyall.vanderlinde@iriesoft.net",
+  residence: 1,
+});
+const formSchema: any = reactive([
   {
     $formkit: "text",
     name: "firstname",
@@ -42,6 +44,12 @@ const formSchema = [
     },
   },
   {
+    $formkit: "select",
+    name: "residence",
+    label: "Where do you currently reside?",
+    options: [],
+  },
+  {
     $formkit: "checkbox",
     name: "eu_citizen",
     id: "eu",
@@ -59,7 +67,23 @@ const formSchema = [
     },
     help: "How often should we display a cookie notice?",
   },
-];
+]);
+
+onMounted(() => {
+  const r = formSchema.find((f: any) => f.name == "residence");
+  if (r) {
+    r.options = [
+      {
+        value: 1,
+        label: "Mecury",
+      },
+      {
+        value: 2,
+        label: "Venus",
+      },
+    ];
+  }
+});
 </script>
 
 <template>
@@ -73,6 +97,8 @@ const formSchema = [
     <input type="checkbox" v-model="data.checked" class="d-block" />
     <input v-if="data.checked" type="text" name="" id="" />
   </div>
+
+  <pre>{{ formData }}</pre>
 </template>
 
 <style></style>
