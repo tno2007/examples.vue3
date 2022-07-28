@@ -3,7 +3,7 @@ import { onMounted, reactive, ref } from "vue";
 import autoAnimate from "@formkit/auto-animate";
 
 const formContainer = ref();
-const fieldset = ref();
+const fieldsetRef = ref();
 
 const register = () => {};
 
@@ -15,7 +15,7 @@ onMounted(() => {
   formContainer.value.querySelectorAll(".formkit-outer").forEach(autoAnimate);
 
   autoAnimate(formContainer.value);
-  autoAnimate(fieldset.value);
+  autoAnimate(fieldsetRef.value);
 });
 
 const formData = ref({});
@@ -75,7 +75,7 @@ const formSchema = [
     </FormKit>
   </div>
 
-  <div ref="fieldset">
+  <div ref="fieldsetRef">
     <input type="checkbox" v-model="data.checked" class="d-block" />
     <input v-if="data.checked" type="text" name="" id="" />
   </div>
