@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, reactive, ref } from "vue";
-//import {  } from "@formkit/vue";
+import {} from "@formkit/vue";
 
 const formContainer = ref();
 const fieldsetRef = ref();
@@ -12,8 +12,9 @@ const data = reactive({
 });
 
 const formData = ref({
+  firstname: null,
   email: "lyall.vanderlinde@iriesoft.net",
-  residence: 1,
+  residence: null,
 });
 const formSchema: any = reactive([
   {
@@ -48,6 +49,10 @@ const formSchema: any = reactive([
     name: "residence",
     label: "Where do you currently reside?",
     options: [],
+    validation: "required",
+    validationMessages: {
+      required: "We need this information to assist you",
+    },
   },
   {
     $formkit: "checkbox",
@@ -69,10 +74,53 @@ const formSchema: any = reactive([
   },
 ]);
 
+interface ISelectOption {
+  value?: any;
+  label: string;
+  attrs?: Record<string, any>;
+}
+
+const populateSelect = () => {
+  fetch(
+    "https://webservices.1stcontact.com/crmproxy/api/v2/entities/lead/attributes/new_country"
+  )
+    .then((response) => response.json())
+    .then((response) => {
+      //console.log("response", response);
+      const data: any[] = response.Result;
+      let selectData: ISelectOption[] = data.map((d) => {
+        return {
+          value: d.Code,
+          label: d.Description,
+        };
+      });
+
+      selectData = [
+        {
+          label: "- Nothing selected -",
+          attrs: {
+            disabled: true,
+          },
+        },
+        ...selectData,
+      ];
+
+      const r = formSchema.find((f: any) => f.name == "residence");
+      r.options = selectData;
+    });
+};
+
 onMounted(() => {
-  const r = formSchema.find((f: any) => f.name == "residence");
+  populateSelect();
+  /*const r = formSchema.find((f: any) => f.name == "residence");
   if (r) {
     r.options = [
+      {
+        label: "- Nothing selected -",
+        attrs: {
+          disabled: true,
+        },
+      },
       {
         value: 1,
         label: "Mecury",
@@ -82,7 +130,7 @@ onMounted(() => {
         label: "Venus",
       },
     ];
-  }
+  }*/
 });
 </script>
 
