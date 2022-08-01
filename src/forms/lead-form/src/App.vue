@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { onMounted, reactive, ref } from "vue";
-import {} from "@formkit/vue";
 
+import { createInput } from "@formkit/vue";
+import OneTimePassword from "./components/OneTimePassword.vue";
+
+const otp = createInput(OneTimePassword);
 const formContainer = ref();
 const fieldsetRef = ref();
 
@@ -17,6 +20,19 @@ const formData = ref({
   residence: null,
 });
 const formSchema: any = reactive([
+  {
+    $formkit: "otp", // no
+    //$el: "otp", // no, only for html
+    //type: "hello", // no
+    //$cmp: "hello", // not working, complains... If this is a native custom element, make sure to exclude it from component resolution
+    name: "two_factor_code",
+    label: "One-time password:",
+    validation: "required",
+    validationMessages: {
+      required: "We need this information to assist you",
+    },
+    help: "We’ve sent a code to your phone",
+  },
   {
     $formkit: "text",
     name: "firstname",
