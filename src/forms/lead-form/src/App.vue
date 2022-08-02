@@ -18,6 +18,15 @@ const formData = ref({
 });
 const formSchema: any = reactive([
   {
+    $formkit: "dayMonthYearPicker",
+    name: "year",
+    label: "First name(s):",
+    validation: "required",
+    validationMessages: {
+      required: "We need this information to assist you",
+    },
+  },
+  {
     $formkit: "text",
     name: "firstname",
     label: "First name(s):",
