@@ -11,7 +11,7 @@
 
 Clone https://www.sableinternational.com/contact-us
 
-- add a disabled first select option [Done]
+
 - Create custom combo field...
   - Country
   - Phone number
@@ -23,3 +23,6 @@ Clone https://www.sableinternational.com/contact-us
 - Create and add 'Our Data Policy'
 
 ## Done
+
+- add a disabled first select option [Done]
+- Add select with list of countries [Done]

@@ -14,6 +14,6 @@ const handleInput = (e: Event) => {
 <template>
   <div>
     <input @input="handleInput" :value="props?.context?._value" />
-    <pre>{{ props.context._value }}</pre>
+    <pre>{{ props?.context?._value }}</pre>
   </div>
 </template>
