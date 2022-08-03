@@ -21,12 +21,14 @@ const formData = ref({
 });
 const formSchema: any = reactive([
   {
-    $formkit: "otp", // no
-    //$el: "otp", // no, only for html
-    //type: "hello", // no
-    //$cmp: "hello", // not working, complains... If this is a native custom element, make sure to exclude it from component resolution
+    $formkit: "otp",
     name: "two_factor_code",
     label: "One-time password:",
+  },
+  {
+    $formkit: "dayMonthYearPicker",
+    name: "year",
+    label: "First name(s):",
     validation: "required",
     validationMessages: {
       required: "We need this information to assist you",
