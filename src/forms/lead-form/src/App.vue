@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { onMounted, reactive, ref } from "vue";
-import {} from "@formkit/vue";
 
+import { createInput } from "@formkit/vue";
+import OneTimePassword from "./components/OneTimePassword.vue";
+
+const otp = createInput(OneTimePassword);
 const formContainer = ref();
 const fieldsetRef = ref();
 
@@ -18,6 +21,11 @@ const formData = ref({
 });
 const formSchema: any = reactive([
   {
+    $formkit: "otp",
+    name: "two_factor_code",
+    label: "One-time password:",
+  },
+  {
     $formkit: "dayMonthYearPicker",
     name: "year",
     label: "First name(s):",
@@ -25,6 +33,7 @@ const formSchema: any = reactive([
     validationMessages: {
       required: "We need this information to assist you",
     },
+    help: "We’ve sent a code to your phone",
   },
   {
     $formkit: "text",
