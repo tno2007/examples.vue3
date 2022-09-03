@@ -1,5 +1,9 @@
-let fieldComponents = {};
+import fieldCheckbox from "../fields/core/fieldCheckbox.vue";
+import fieldInput from "../fields/core/fieldInput.vue";
+import fieldSelect from "../fields/core/fieldSelect.vue";
 
-import {} from "module";
-
-module.exports = fieldComponents;
+export default {
+  fieldCheckbox,
+  fieldInput,
+  fieldSelect,
+};

@@ -9,10 +9,11 @@ import {
   isFunction,
   isFinite,
 } from "lodash";
-
-import fecha from "fecha";
 */
 
+import { format } from "fecha";
+
+import { isFunction, isString } from "../nodash";
 import type { IField } from "../typings/index";
 
 let resources = {
@@ -48,8 +49,12 @@ let resources = {
   invalidTextContainSpec: "Invalid text! Cannot contains special characters",
 };
 
-function checkEmpty(value: string , required: boolean, messages = resources) {
-  if ((value == null) || value === "") {
+export function checkEmpty(
+  value: string,
+  required: boolean,
+  messages = resources
+) {
+  if (value == null || value === "") {
     if (required) {
       return [msg(messages.fieldIsRequired)];
     } else {
@@ -59,7 +64,7 @@ function checkEmpty(value: string , required: boolean, messages = resources) {
   return null;
 }
 
-function msg(text: string, ...args:any[]) {
+export function msg(text: string, ...args: any[]) {
   if (text != null && args.length > 1) {
     for (let i = 1; i < args.length; i++) {
       text = text.replace("{" + (i - 1) + "}", args[i]);
@@ -72,11 +77,11 @@ function msg(text: string, ...args:any[]) {
 const validators = {
   resources,
 
-  required(value : any, field : IField, model: object, messages = resources) {
+  required(value: any, field: IField, model: object, messages = resources) {
     return checkEmpty(value, field.required, messages);
   },
 
-  number(value : any, field :IField, model : object, messages = resources) {
+  number(value: any, field: IField, model: object, messages = resources) {
     let res = checkEmpty(value, field.required, messages);
     if (res != null) return res;
 
@@ -96,7 +101,12 @@ const validators = {
     return err;
   },
 
-  integer(value : string | number, field : IField, model : object, messages = resources) {
+  integer(
+    value: string | number,
+    field: IField,
+    model: object,
+    messages = resources
+  ) {
     let res = checkEmpty(value as string, field.required, messages);
     if (res != null) return res;
     let errs = validators.number(value, field, model, messages);
@@ -108,7 +118,12 @@ const validators = {
     return errs;
   },
 
-  double(value : string | number, field : IField, model : object, messages = resources) {
+  double(
+    value: string | number,
+    field: IField,
+    model: object,
+    messages = resources
+  ) {
     let res = checkEmpty(value as string, field.required, messages);
     if (res != null) return res;
 
@@ -117,13 +132,18 @@ const validators = {
     }
   },
 
-  string(value : string | number, field : IField, model : object, messages = resources) {
+  string(
+    value: string | number,
+    field: IField,
+    model: object,
+    messages = resources
+  ) {
     let res = checkEmpty(value as string, field.required, messages);
     if (res != null) return res;
 
     let err = [];
-    if (isString(value as string)) {      
-      let v  = value as string;
+    if (isString(value as string)) {
+      let v = value as string;
       if (!(field.min == null) && v.length < field.min) {
         err.push(msg(messages.textTooSmall, v.length, field.min));
       }
@@ -138,7 +158,7 @@ const validators = {
     return err;
   },
 
-  array(value : any, field : IField, model : object, messages = resources) {
+  array(value: any, field: IField, model: object, messages = resources) {
     if (field.required) {
       if (!Array.isArray(value)) {
         return [msg(messages.thisNotArray)];
@@ -160,7 +180,12 @@ const validators = {
     }
   },
 
-  date(value : string | number, field : IField, model : object, messages = resources) {
+  date(
+    value: string | number,
+    field: IField,
+    model: object,
+    messages = resources
+  ) {
     let res = checkEmpty(value as string, field.required, messages);
     if (res != null) return res;
 
@@ -174,21 +199,21 @@ const validators = {
     if (!(field.min == null)) {
       let min = new Date(field.min);
       if (m.valueOf() < min.valueOf()) {
-        err.push(msg(messages.dateIsEarly, fecha.format(m), fecha.format(min)));
+        err.push(msg(messages.dateIsEarly, format(m), format(min)));
       }
     }
 
     if (!(field.max == null)) {
       let max = new Date(field.max);
       if (m.valueOf() > max.valueOf()) {
-        err.push(msg(messages.dateIsLate, fecha.format(m), fecha.format(max)));
+        err.push(msg(messages.dateIsLate, format(m), format(max)));
       }
     }
 
     return err;
   },
 
-  regexp(value : any, field : IField, model : object, messages = resources) {
+  regexp(value: any, field: IField, model: object, messages = resources) {
     let res = checkEmpty(value, field.required, messages);
     if (res != null) return res;
 
@@ -200,7 +225,12 @@ const validators = {
     }
   },
 
-  email(value : string | number, field : IField, model : object, messages = resources) {
+  email(
+    value: string | number,
+    field: IField,
+    model: object,
+    messages = resources
+  ) {
     let res = checkEmpty(value as string, field.required, messages);
     if (res != null) return res;
 
@@ -211,7 +241,7 @@ const validators = {
     }
   },
 
-  url(value : any, field : IField, model : object, messages = resources) {
+  url(value: any, field: IField, model: object, messages = resources) {
     let res = checkEmpty(value, field.required, messages);
     if (res != null) return res;
 
@@ -222,7 +252,12 @@ const validators = {
     }
   },
 
-  creditCard(value : string | number, field : IField, model : object, messages = resources) {
+  creditCard(
+    value: string | number,
+    field: IField,
+    model: object,
+    messages = resources
+  ) {
     let res = checkEmpty(value as string, field.required, messages);
     if (res != null) return res;
 
@@ -260,7 +295,12 @@ const validators = {
     }
   },
 
-  alpha(value : string | number, field : IField, model : object, messages = resources) {
+  alpha(
+    value: string | number,
+    field: IField,
+    model: object,
+    messages = resources
+  ) {
     let res = checkEmpty(value as string, field.required, messages);
     if (res != null) return res;
 
@@ -270,7 +310,7 @@ const validators = {
     }
   },
 
-  alphaNumeric(value : any, field : IField, model : object, messages = resources) {
+  alphaNumeric(value: any, field: IField, model: object, messages = resources) {
     let res = checkEmpty(value, field.required, messages);
     if (res != null) return res;
 
@@ -281,12 +321,15 @@ const validators = {
   },
 };
 
+/*
 Object.keys(validators).forEach((name) => {
   const fn = validators[name];
   if (isFunction(fn)) {
-    fn.locale = (customMessages) => (value, field, model) =>
-      fn(value, field, model : object, defaults(customMessages, resources));
+    fn.locale =
+      (customMessages: any) => (value: any, field: any, model: string) =>
+        fn(value, field, model, defaults(customMessages, resources));
   }
 });
+*/
 
 export default validators;

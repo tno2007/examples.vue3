@@ -15,6 +15,7 @@ specifiers:
   '@vue/tsconfig': ^0.1.3
   eslint: ^8.20.0
   eslint-plugin-vue: ^8.7.1
+  fecha: ^4.2.3
   get-value: ^3.0.1
   jsdom: ^19.0.0
   npm-run-all: ^4.1.5
@@ -34,6 +35,7 @@ dependencies:
   '@formkit/addons': 1.0.0-beta.10_vue@3.2.37
   '@formkit/themes': 1.0.0-beta.10
   '@formkit/vue': 1.0.0-beta.10_vue@3.2.37
+  fecha: 4.2.3
   get-value: 3.0.1
   pinia: 2.0.17_j6bzmzd4ujpabbp5objtwxyjp4
   vue: 3.2.37
@@ -1420,6 +1422,10 @@ packages:
     dependencies:
       reusify: 1.0.4
     dev: true
+
+  /fecha/4.2.3:
+    resolution: {integrity: sha512-OP2IUU6HeYKJi3i0z4A19kHMQoLVs4Hc+DPqqxI2h/DPZHTm/vjsfC6P0b4jCMy14XizLBqvndQ+UilD7707Jw==}
+    dev: false
 
   /file-entry-cache/6.0.1:
     resolution: {integrity: sha512-7Gps/XWymbLk2QLYK4NzpMOrYjMhdIxXuIvy2QBsLE6ljuodKvdkWs/cpyJJ3CVIVpH0Oi1Hvg1ovbMzLdFBBg==}

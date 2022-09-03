@@ -1,6 +1,6 @@
 import { ref, onMounted, onUnmounted } from "vue";
 
-import { get as objGet } from "get-value";
+import { isFunction, isNil, isString, objGet } from "./nodash";
 
 export const useFormMixin = () => {
   // state encapsulated and managed by the composable
@@ -21,19 +21,19 @@ export const useFormMixin = () => {
   // custom stuff here...
   // ***************************
 
-  const getFieldRowClasses = (field) => {
+  const getFieldRowClasses = (field: any) => {
     const hasErrors = fieldErrors(field).length > 0;
     let baseClasses = {
-      [objGet(this.options, "validationErrorClass", "error")]: hasErrors,
-      [objGet(this.options, "validationSuccessClass", "valid")]: !hasErrors,
-      disabled: this.fieldDisabled(field),
-      readonly: this.fieldReadonly(field),
-      featured: this.fieldFeatured(field),
-      required: this.fieldRequired(field),
+      [objGet(options, "validationErrorClass", "error")]: hasErrors,
+      [objGet(options, "validationSuccessClass", "valid")]: !hasErrors,
+      disabled: fieldDisabled(field),
+      readonly: fieldReadonly(field),
+      featured: fieldFeatured(field),
+      required: fieldRequired(field),
     };
 
-    if (isArray(field.styleClasses)) {
-      forEach(field.styleClasses, (c) => (baseClasses[c] = true));
+    if (Array.isArray(field.styleClasses)) {
+      (field.styleClasses as []).forEach((c) => (baseClasses[c] = true));
     } else if (isString(field.styleClasses)) {
       baseClasses[field.styleClasses] = true;
     }
@@ -45,8 +45,8 @@ export const useFormMixin = () => {
     return baseClasses;
   };
 
-  const fieldErrors = (field) => {
-    let res = this.errors.filter((e) => e.field === field);
+  const fieldErrors = (field: object) => {
+    let res = errors.filter((e) => e.field === field);
     return res.map((item) => item.error);
   };
 
@@ -88,5 +88,12 @@ export const useFormMixin = () => {
   };
 
   // expose managed state as return value
-  return { x, y };
+  return {
+    getFieldRowClasses,
+    fieldErrors,
+    fieldDisabled,
+    fieldReadonly,
+    fieldFeatured,
+    fieldRequired,
+  };
 };

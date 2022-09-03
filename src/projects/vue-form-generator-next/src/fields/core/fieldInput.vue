@@ -1,4 +1,6 @@
-<script></script>
+<script setup lang="ts">
+import { getFieldID } from "./abstractField";
+</script>
 
 <template lang="pug">
 .wrapper(v-attributes="'wrapper'")
