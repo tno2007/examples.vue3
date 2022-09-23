@@ -12,8 +12,21 @@ const handleInput = (e: Event) => {
 </script>
 
 <template>
-  <div>
-    <input @input="handleInput" :value="props?.context?._value" />
-    <pre>{{ props?.context?._value }}</pre>
-  </div>
+  <input
+    @input="handleInput"
+    :value="props?.context?._value"
+    class="formkit-input d-block"
+    type="text"
+  />
+
+  <pre class="d-none d-block">{{ props?.context?._value }}</pre>
 </template>
+
+<style lang="scss">
+.d-none {
+  display: none !important;
+}
+.d-block {
+  display: block;
+}
+</style>
