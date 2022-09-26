@@ -40,13 +40,18 @@ const schema = reactive([
     $el: "p",
     children: ["Email enabled? ", "$get(hasMail).value"],
   },
-
   {
     $formkit: "text",
     name: "email",
     label: "Email",
     if: "$get(hasMail).value",
     validation: "required|email",
+  },
+  {
+    $formkit: "text",
+    name: "email2",
+    label: "Email 2",
+    if: "$get(name).value === 'a'",
   },
   /*
   {
@@ -99,6 +104,7 @@ onMounted(() => {});
     </FormKit>
     <pre>{{ refModel }}</pre>
 
+    <!--
     <FormKit type="form">
       <FormKit
         type="email"
@@ -111,9 +117,12 @@ onMounted(() => {});
         v-model="model2"
       />
     </FormKit>
-  </div>
+  --></div>
+
+  <!--
   <pre>{{ model2 }}</pre>
   <h1 v-if="refModel.hasEmail">{{ refModel.name }}</h1>
+  -->
 </template>
 
 <style lang="scss"></style>
