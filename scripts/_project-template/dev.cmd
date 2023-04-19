@@ -1,0 +1,1 @@
+pnpm vite ./src/projects/_project-template --port 5000

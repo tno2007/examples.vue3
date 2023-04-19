@@ -176,7 +176,7 @@ const schema = reactive([
 
 const handleSubmit = () => alert("Valid submit!");
 
-onMounted(() => {});
+//onMounted(() => {});
 </script>
 
 <template>
@@ -185,7 +185,12 @@ onMounted(() => {});
       :x
     -->
 
-    <FormKit type="form" v-model="refModel" @submit="handleSubmit">
+    <FormKit
+      type="form"
+      v-model="refModel"
+      @submit="handleSubmit"
+      form-class="selection:bg-pink-200 my-8 mx-auto w-full max-w-2xl bg-white border-2 border-green-400 p-6 shadow-lg rounded-lg"
+    >
       <FormKitSchema :schema="schema" />
     </FormKit>
     <pre>{{ refModel }}</pre>
