@@ -5,12 +5,82 @@ import { onMounted, reactive, ref, watch } from "vue";
 import io from "socket.io-client";
 import groupArray from "group-array";
 import { computed } from "vue";
+import JsonEditorVue from "json-editor-vue";
 
-const model = ref({});
+const model = ref({
+  contact: {
+    new_hasaustraliannationality: false,
+    new_hasnewzealandnationality: false,
+    new_hasbritishnationality: false,
+    new_hasirishnationality: false,
+    new_hasbritishoririshnationality: false,
+    new_hasportugesecitizenship: false,
+    new_haseuropeancitizenship: false,
+    new_gender: 1,
+    new_maritalstatus: 2,
+    new_dateofbirth: "1964-12-30",
+    new_dobless1: 18,
+    new_wealthinbasecurrency: 1001,
+    new_wealthinusdollars: 500001,
+    new_wealthineuros: 270000,
+    new_wealthinaustraliandollars: 1240001,
+    new_overallworth: 1001,
+    new_nationality: 5478,
+    new_nationality2: -1,
+    new_nationality3: -1,
+    new_passport: 5478,
+    new_passport2: -1,
+    new_passport3: -1,
+    new_countryvocationshortage: 100000000,
+    new_region: 100000005,
+    new_countryoforigin: 5553,
+  },
+
+  /**/
+  dependent: {
+    new_dependenttype: 100000005,
+    new_dateofbirth: "1964-12-30",
+    new_dateofmarriage: "1981-12-30",
+    new_hasbritishnationality: 0,
+    new_hasaustraliannationality: 0,
+    new_hasnewzealandnationality: 0,
+    new_hasirishnationality: 0,
+    new_hasbritishoririshnationality: 0,
+    new_hasportugesecitizenship: 0,
+    new_haseuropeancitizenship: 1,
+    new_maritalstatus: 2,
+    new_nationality: 5478,
+    new_nationality2: -1,
+    new_nationality3: -1,
+    new_passport: 5478,
+    new_passport2: -1,
+    new_passport3: -1,
+  },
+
+  ancestry: {
+    new_fathercountryofbirth: 5478,
+    new_mothercountryofbirth: 5477,
+    new_mothersfathercountryofbirth: 5477,
+    new_mothersmothercountryofbirth: 5477,
+    new_fathersfathercountryofbirth: 5477,
+    new_fathersmothercountryofbirth: 5477,
+    new_applicantplaceofbirth: 5477,
+    new_clientplaceofbirth: 3953,
+    new_clientbornineurope: 1,
+    new_fatherbornineurope: 1,
+    new_motherbornineurope: 1,
+    new_fathersfatherbornineurope: 1,
+    new_fathersmotherbornineurope: 1,
+    new_mothersfatherbornineurope: 1,
+    new_mothersmotherbornineurope: 1,
+  },
+});
+
+// dev-exploresocket.1stcontact.com/api/v1/solution.service
 
 const data = reactive({
-  socket: io("dev-webservices.1stcontact.com/api/v1/solution.service", {
-    path: "/apis/explore-solutions/socket.io/",
+  socket: io("dev-exploresocket.1stcontact.com/api/v1/solution.service", {
+    // path: "/apis/explore-solutions/socket.io/",
     transportOptions: {
       polling: {
         extraHeaders: {
@@ -1234,6 +1304,7 @@ onMounted(() => {
   });
 });
 
+/*
 watch(
   () => model,
   (v, ov) => {
@@ -1249,6 +1320,64 @@ watch(
   },
   { deep: true }
 );
+*/
+
+/*
+    // working
+      contact: {
+        new_dobless1: 18,
+        new_nationality: 4627,
+        new_nationality2: -1,
+        new_nationality3: -1,
+        new_passport: 4627,
+        new_passport2: -1,
+        new_passport3: -1,
+        new_wealthinusdollars: 185001,
+      },
+
+      dependent: {
+        new_passport: 4627,
+        new_passport2: -1,
+        new_passport3: -1,
+        new_nationality: 4627,
+        new_nationality2: -1,
+        new_nationality3: -1,
+        new_dependenttype: 100000000,
+      },
+*/
+
+const checkForOpportunities = () => {
+  console.log(model.value);
+
+  data.socket.emit("find-solution-request", {
+    _id: "testerX",
+    //data: model.value,
+    data: {
+      contact: {
+        new_dobless1: 18,
+        new_nationality: 4627,
+        new_nationality2: -1,
+        new_nationality3: -1,
+        new_passport: 4627,
+        new_passport2: -1,
+        new_passport3: -1,
+        new_wealthinusdollars: 185001,
+      },
+
+      dependent: {
+        new_passport: 4627,
+        new_passport2: -1,
+        new_passport3: -1,
+        new_nationality: 4627,
+        new_nationality2: -1,
+        new_nationality3: -1,
+        new_dependenttype: 100000005,
+      },
+
+      ancestry: {},
+    },
+  });
+};
 
 const schema: FormKitSchemaNode[] = [
   /*{
@@ -1541,27 +1670,24 @@ const c = computed(() => {
       options: (data.grouped[key as any] as []).length,
     };
   });
-
-  /*
-  let collection = [];
-  Object.keys(data.grouped).forEach((key, index, array) => {
-    const count = array[key].length;
-    const income = calculateIncome();
-    const spend = calculateSpend();
-
-    collection.push({
-      country: key,
-      count: count,
-      income: "abc",
-      spend: "xyz",
-    });
-  });
-  */
 });
 </script>
 
 <template>
-  <pre>{{ model }}</pre>
+  <pre v-show="false">{{ model }}</pre>
+
+  <JsonEditorVue
+    v-model="model"
+    v-bind="{
+      /* local props & attrs */
+    }"
+    v-show="false"
+  />
+
+  <br />
+
+  <button @click="checkForOpportunities">Send</button>
+
   <FormKit type="form" id="form" :actions="false" v-model="model">
     <FormKitSchema :schema="schema" :data="data" />
   </FormKit>

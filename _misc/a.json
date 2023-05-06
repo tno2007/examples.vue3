@@ -1,0 +1,91 @@
+{
+  "applicant": {
+    "skilledShortages": [
+      {
+        "Country": "Canada",
+        "Shortage": "In need (per government list)"
+      },
+      {
+        "Country": "Ireland",
+        "Shortage": "In need (per government list)"
+      },
+      {
+        "Country": "New Zealand",
+        "Shortage": "In need (per government list)"
+      },
+      {
+        "Country": "United Kingdom",
+        "Shortage": "In need (per government list)"
+      },
+      {
+        "Country": "Greece",
+        "Shortage": "In need (per research orgs)"
+      },
+      {
+        "Country": "Malta",
+        "Shortage": "In need (per research orgs)"
+      },
+      {
+        "Country": "Netherlands",
+        "Shortage": "In need (per research orgs)"
+      },
+      {
+        "Country": "Portugal",
+        "Shortage": "In need (per research orgs)"
+      }
+    ],
+    "opportunities": [
+      {
+        "Destination": "Ireland",
+        "NumberOfDestinations": 1,
+        "CurrentIncome": "€ 0",
+        "AverageSpend": "€ 45127.10",
+        "TuitionCost": null,
+        "ExchangeRate": null,
+        "Remuneration": [
+          {
+            "Expected": "10th percentile",
+            "Average": "€ 39000.00",
+            "RatioTolivingCost": 86.42
+          },
+          {
+            "Expected": "Median",
+            "Average": "€ 59000.00",
+            "RatioTolivingCost": 130.74
+          },
+          {
+            "Expected": "90th percentile",
+            "Average": "€ 81000.00",
+            "RatioTolivingCost": 179.49
+          }
+        ]
+      },
+      {
+        "Destination": "United Kingdom",
+        "NumberOfDestinations": 1,
+        "CurrentIncome": "£ 0",
+        "AverageSpend": "£ 35106.17",
+        "TuitionCost": null,
+        "ExchangeRate": null,
+        "Remuneration": [
+          {
+            "Expected": "10th percentile",
+            "Average": "£ 27000.00",
+            "RatioTolivingCost": 76.91
+          },
+          {
+            "Expected": "Median",
+            "Average": "£ 40000.00",
+            "RatioTolivingCost": 113.94
+          },
+          {
+            "Expected": "90th percentile",
+            "Average": "£ 65000.00",
+            "RatioTolivingCost": 185.15
+          }
+        ]
+      }
+    ]
+  },
+  "partner": {}
+}
