@@ -5,20 +5,25 @@ import {
   createAutoAnimatePlugin,
   createMultiStepPlugin,
 } from "@formkit/addons";
-import Vue3Transitions from "vue3-transitions";
+import { autoAnimatePlugin } from "@formkit/auto-animate/vue";
 
 // import App from "./App.vue";
 import App from "./AppFullSchema.vue";
 
 const app = createApp(App);
 
+app.use(autoAnimatePlugin);
+
 const config = defaultConfig({
   plugins: [createAutoAnimatePlugin(), createMultiStepPlugin()],
 });
 app.use(plugin, config);
 
-app.use(Vue3Transitions);
+import VueTransitions from "@morev/vue-transitions";
+app.use(VueTransitions);
+import "@morev/vue-transitions/styles";
 
+import "virtual:uno.css";
 import "@formkit/addons/css/multistep";
 import "@formkit/themes/genesis";
 

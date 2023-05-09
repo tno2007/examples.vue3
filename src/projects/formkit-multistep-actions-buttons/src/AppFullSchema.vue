@@ -10,7 +10,7 @@ import { reactive, ref } from "vue";
 const root = ref();
 const multistep = ref();
 
-const go = (delta: number = 1) => {
+const go = (delta = 1) => {
   const multiStep = root.value?.$refs?.multistep.node;
 
   if (!multiStep) return;
@@ -97,6 +97,9 @@ const schema = ref<FormKitSchemaCondition | FormKitSchemaNode[]>([
       //plugins: "$plugins",
       actions: false,
     },
+    attrs: {
+      "v-auto-animate": true,
+    },
     children: [
       {
         $formkit: "multi-step",
@@ -110,7 +113,7 @@ const schema = ref<FormKitSchemaCondition | FormKitSchemaNode[]>([
               type: "step",
               name: "first",
               stepClass: {
-                block: true,
+                //block: true,
               },
             },
             children: [
@@ -122,7 +125,7 @@ const schema = ref<FormKitSchemaCondition | FormKitSchemaNode[]>([
           {
             $formkit: "step",
             name: "one",
-            stepClass: "block",
+            //stepClass: "block",
             children: [
               {
                 $formkit: "text",
@@ -152,9 +155,12 @@ const schema = ref<FormKitSchemaCondition | FormKitSchemaNode[]>([
             ],
           },
           {
+            //$cmp: "transition-expand",
+            //children: [
+            //{
             $formkit: "step",
             name: "two",
-            stepClass: "block",
+            //stepClass: "block",
             key: "two",
             children: [
               {
@@ -162,13 +168,15 @@ const schema = ref<FormKitSchemaCondition | FormKitSchemaNode[]>([
                 label: "Surname",
               },
             ],
-            if: "$get(enableStep2).value === 2",
+            //if: "$get(enableStep2).value === 2",
+            //},
+            //],
           },
           {
             $formkit: "step",
             name: "three",
             key: "three",
-            stepClass: "block",
+            //stepClass: "block",
             children: [
               {
                 $formkit: "number",
@@ -181,7 +189,7 @@ const schema = ref<FormKitSchemaCondition | FormKitSchemaNode[]>([
             $formkit: "step",
             name: "four",
             key: "four",
-            stepClass: "block",
+            //stepClass: "block",
             children: [
               {
                 $formkit: "select",
@@ -246,66 +254,82 @@ const schema = ref<FormKitSchemaCondition | FormKitSchemaNode[]>([
     children: "$stringify( $get(form).value )",
   },
 ]);
+
+const displayIndex = ref(1);
 </script>
 
 <template>
-  <pre>{{ a }}</pre>
-
+  <!-- 
+  <button @click="displayIndex = displayIndex == 1 ? 2 : 1">Click here</button>
+  <transition-expand>
+    <div v-show="displayIndex === 1" class="w-50 h-50 bg-green-100">Page 1</div>
+  </transition-expand>
+  <transition-expand>
+    <div v-show="displayIndex === 2" class="w-50 h-50 bg-yellow-200">
+      Page 2
+    </div>
+  </transition-expand>
+-->
   <!-- schema -->
-  <FormKitSchema :schema="schema" :data="data" ref="root" />
+  <div>
+    <FormKitSchema :schema="schema" :data="data" ref="root" />
+  </div>
 
-  <!-- component 
+  <!-- component   
   <FormKit type="multi-step" ref="multistepX">
-    <FormKit type="step" name="one">
-      <FormKit type="text" label="Name:"></FormKit>
-    </FormKit>
-    <FormKit type="step" name="two">
-      <FormKit type="text" label="Surname:"></FormKit>
-    </FormKit>
+    <transition-expand>
+      <FormKit type="step" name="one" key="1">
+        <FormKit type="text" label="Name:"></FormKit>
+      </FormKit>
+    </transition-expand>
+    <transition-expand>
+      <FormKit type="step" name="two" key="2">
+        <FormKit type="text" label="Surname:"></FormKit>
+      </FormKit>
+    </transition-expand>
   </FormKit>
   -->
+
   <button @click="go(-1)">Go -1</button>
   <br />
   <button @click="go(+1)">Go +1</button>
 </template>
 
 <style lang="scss">
-/*
-  Enter and leave animations can use different
-  durations and timing functions.
-*/
-.slide-fade-enter-active {
-  transition: all 0.3s ease-out;
-}
-
-.slide-fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
-}
-
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-  transform: translateX(20px);
-  opacity: 0;
-}
-
-.block {
+.x-block {
   display: block !important;
 }
 
 .formkit-outer[data-type="multi-step"] {
+  > [data-tab-style="progress"] > .formkit-tabs .formkit-tab-label {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    white-space: nowrap;
+    font-size: 0.8rem;
+  }
   .formkit-step {
     display: block !important;
     opacity: 1;
     visibility: visible;
-    transition-property: opacity;
-    transition-duration: 500ms;
+    transition: 0.5s;
 
     &[hidden] {
       opacity: 0;
-      height: 0;
       visibility: hidden;
-      transition-duration: 500ms;
+      transition: 0.5s;
+
+      height: 0;
+      overflow: hidden;
     }
   }
+}
+
+.formkit-outer[data-type="multi-step"]
+  > [data-tab-style="progress"]
+  > .formkit-tabs
+  > .formkit-tab[data-active="true"]
+  .formkit-tab-label {
+  background-color: red;
 }
 </style>
