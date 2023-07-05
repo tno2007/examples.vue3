@@ -255,7 +255,136 @@ const schema = ref<FormKitSchemaCondition | FormKitSchemaNode[]>([
   },
 ]);
 
-const displayIndex = ref(1);
+const scheme1 = [
+  {
+    $formkit: "text",
+    label: "Name",
+    prefixIcon: "avatarMan",
+  },
+  {
+    $formkit: "text",
+    id: "enableStep2",
+    name: "enableStep2",
+    label: "Enable Step 2",
+    options: [],
+  },
+  {
+    $formkit: "text",
+    id: "enableStep3",
+    name: "enableStep3",
+    label: "Enable Step 3",
+  },
+];
+
+const scheme2 = [
+  {
+    $formkit: "text",
+    label: "Surname",
+  },
+  {
+    $formkit: "text",
+    id: "enableStep3",
+    name: "enableStep3",
+    label: "Enable Step 3",
+  },
+];
+
+const i = ref(0);
+const prev = () => {
+  if (i.value <= 0) return;
+  i.value -= 1;
+};
+const next = () => {
+  if (i.value >= 1) return;
+  i.value += 1;
+};
+
+const promoteObjectArrayItems = (
+  array: any[],
+  idKey: string,
+  promotions: any[],
+  keepCopyOfPromotedItems: false
+) => {
+  // loop thru array
+  // for each one
+  // see if jey equal to the value in the array
+
+  //[].indexOf()
+
+  // ! pass [] into this fn, but dont return a value from this array, just print out the [] you passed in
+  // to see if the passed in array was altered
+
+  // create safe working copy of passed in array
+  const workingArray = [...array];
+
+  // run topList array in reverse so it add top items in the order specified
+  for (let i = promotions.length - 1; i >= 0; i--) {
+    // get current loop item by i index
+    const p = promotions[i];
+    // find index where top item is
+    const itemIndex = workingArray.findIndex((a) => a[idKey] === p);
+    // skip further processing if match not found
+    if (itemIndex == -1) continue;
+
+    // get ref to the item found
+    const item = workingArray[itemIndex];
+
+    /*
+    if (keepCopyOfPromotedItems) {
+      const deletedItem = workingArray.splice(itemIndex, 1, item);
+    } else {
+      const deletedItem = workingArray.splice(itemIndex, 1);
+    }
+    */
+
+    const deletedItem = keepCopyOfPromotedItems
+      ? workingArray.splice(itemIndex, 1, item)
+      : workingArray.splice(itemIndex, 1);
+
+    // move item from index (no copy)
+    //const deletedItem = workingArray.splice(itemIndex, 1);
+
+    console.log("deleted", deletedItem);
+    console.log("workingArray", workingArray);
+
+    // make copy of deleted item
+
+    // promote the current top-list item to the top of the array
+    /*
+    workingArray.splice(
+      0, // start processing from index-0 (start) of array,
+      0, // how many items to remove
+      workingArray.splice(itemIndex, 1)[0] // detach the item and return it
+    );
+    */
+  }
+
+  return workingArray;
+};
+
+let b = [
+  {
+    label: "Serbia and Montenegro",
+    value: 1328,
+  },
+  {
+    label: "New Zealand",
+    value: 5578,
+  },
+  {
+    label: "Australia",
+    value: 5428,
+  },
+  {
+    label: "Ireland",
+    value: 5553,
+  },
+];
+
+const c = promoteObjectArrayItems(b, "value", [5553]);
+
+//console.log("b", b);
+//console.log("c", c);
 </script>
 
 <template>
@@ -270,10 +399,18 @@ const displayIndex = ref(1);
     </div>
   </transition-expand>
 -->
-  <!-- schema -->
-  <div>
-    <FormKitSchema :schema="schema" :data="data" ref="root" />
+
+  <div class="flex justify-between">
+    <button @click="prev">Go -1</button>
+    <button @click="next">Go +1</button>
   </div>
+  <!-- schema -->
+  <div v-auto-animate>
+    <FormKitSchema :schema="scheme1" v-if="i == 0" />
+    <FormKitSchema :schema="scheme2" v-if="i == 1" />
+  </div>
+
+  <div></div>
 
   <!-- component   
   <FormKit type="multi-step" ref="multistepX">
@@ -289,10 +426,6 @@ const displayIndex = ref(1);
     </transition-expand>
   </FormKit>
   -->
-
-  <button @click="go(-1)">Go -1</button>
-  <br />
-  <button @click="go(+1)">Go +1</button>
 </template>
 
 <style lang="scss">

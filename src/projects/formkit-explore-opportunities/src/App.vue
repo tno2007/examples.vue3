@@ -1,9 +1,9 @@
 <!-- eslint-disable @typescript-eslint/no-explicit-any -->
 <script setup lang="ts">
 import type { FormKitSchemaNode } from "@formkit/core";
-import { onMounted, reactive, ref, watch } from "vue";
+import { onMounted, reactive, ref } from "vue";
 import io from "socket.io-client";
-import groupArray from "group-array";
+import { group } from "group-items";
 import { computed } from "vue";
 import JsonEditorVue from "json-editor-vue";
 
@@ -1181,10 +1181,10 @@ const data = reactive({
     },
   ],
   opportunities: {
-    collection: [],
+    collection: [] as any,
     collapsed: false,
   },
-  grouped: [],
+  grouped: [] as any,
 });
 
 const request = {
@@ -1286,7 +1286,12 @@ onMounted(() => {
     console.log("New Message: ", responseData);
     data.opportunities.collection = responseData;
 
-    data.grouped = groupArray(responseData.data, "country");
+    // data.grouped = groupArray(responseData.data, "country");
+    // const a = group(responseData.data).by("country");
+
+    console.log("responseData", responseData.data);
+    data.grouped = group(responseData.data).by("country");
+    console.log("data.grouped", data.grouped);
 
     const solutions = responseData;
     solutions.value = responseData.data;
@@ -1658,11 +1663,6 @@ const schema: FormKitSchemaNode[] = [
   },
 ];
 
-const group = () => {
-  // console.log(solutions.value);
-  //grouped.value = groupArray(solutions.value, "country");
-};
-
 const c = computed(() => {
   return Object.keys(data.grouped).map((key, index, array) => {
     return {
@@ -1691,14 +1691,14 @@ const c = computed(() => {
   <FormKit type="form" id="form" :actions="false" v-model="model">
     <FormKitSchema :schema="schema" :data="data" />
   </FormKit>
-  <button @click="group">Group now!</button>
 
   <p>Total: {{ data?.opportunities?.collection?.data?.length }}</p>
   <p>Grouped: {{ Object.keys(data.grouped).length }}</p>
   <p>
     Unnamed:
     {{
-      data?.opportunities?.collection?.data?.filter((x) => !x.country).length
+      data?.opportunities?.collection?.data?.filter((x: any) => !x.country)
+        .length
     }}
   </p>
 
