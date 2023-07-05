@@ -1,0 +1,1 @@
+node -r @swc-node/register ./scripts/create-project/copy.ts

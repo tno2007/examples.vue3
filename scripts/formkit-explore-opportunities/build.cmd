@@ -1,0 +1,1 @@
+pnpm vite build ./src/projects/formkit-explore-opportunities
