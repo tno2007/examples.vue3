@@ -1,38 +1,17 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import TreeItem from "./components/TreeItem.vue";
+import SimpleTree from "./components/list.vue";
+import { useAppStore } from "../../stores/app";
 
-const treeData = ref({
-  name: "My Tree",
-  children: [
-    { name: "hello" },
-    { name: "wat" },
-    {
-      name: "child folder",
-      children: [
-        {
-          name: "child folder",
-          children: [{ name: "hello" }, { name: "wat" }],
-        },
-        { name: "hello" },
-        { name: "wat" },
-        {
-          name: "child folder",
-          children: [{ name: "hello" }, { name: "wat" }],
-        },
-      ],
-    },
-  ],
-});
+const store = useAppStore();
+
+const a = store.tree;
 </script>
 
 <template>
-  <ul id="demo">
-    <TreeItem
-      class="item"
-      :item="treeData"
-      ...make-folder="makeFolder"
-      ...add-item="addItem"
-    ></TreeItem>
-  </ul>
+  <!--
+<ul id="demo"></ul>
+  -->
+
+  <SimpleTree :items="store.tree"> </SimpleTree>
 </template>

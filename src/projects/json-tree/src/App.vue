@@ -1,19 +1,15 @@
 <script setup lang="ts">
-import VueTree from "./components/VueTree.vue";
-import TreeVue from "./components/TreeVue.vue";
+// import VueTree from "./components/VueTree.vue";
+import Vue3TreeVue from "./components/Vue3TreeVue.vue";
 import VueTwoExample from "./components/VueTwoExample/VueTwoExample.vue";
 </script>
 
 <template>
-    <!--
-
-    -->
-    <VueTree></VueTree>
-    <TreeVue></TreeVue>
-    <VueTwoExample></VueTwoExample>
-    
+  <h1>Vue3TreeVue</h1>
+  <Vue3TreeVue></Vue3TreeVue>
+  <hr />
+  <h1>VueTwoExample</h1>
+  <VueTwoExample></VueTwoExample>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

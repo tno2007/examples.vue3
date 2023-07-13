@@ -1,0 +1,34 @@
+<script setup lang="ts">
+import { TreeView } from "@grapoza/vue-tree";
+
+import { ref } from "vue";
+const dataModel = ref([
+  {
+    id: "Services",
+    label: "Services",
+    treeNodeSpec: {
+      state: {
+        expanded: true,
+      },
+    },
+    children: [
+      { id: 1, label: "Immigration" },
+      { id: "node2", label: "SME" },
+    ],
+  },
+]);
+</script>
+
+<template>
+  <div class="container">
+    <h2>VueTree</h2>
+    <VueTree
+      :selectionMode="'single'"
+      id="my-tree"
+      :initial-model="dataModel"
+    ></VueTree>
+  </div>
+  <hr />
+</template>
+
+<style scoped></style>
