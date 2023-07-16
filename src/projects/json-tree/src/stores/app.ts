@@ -14,15 +14,18 @@ export const useAppStore = defineStore("app", () => {
     {
       label: "Services",
       name: "Services",
+      class: "red",
       children: [
         {
           label: "Immigration",
           name: "Immigration",
+          class: "blue",
           children: [
             {
               _id: "Onboarding questionnaire",
               label: "Onboarding questionnaire",
               name: "Onboarding questionnaire",
+              class: "green"
             },
           ],
         },

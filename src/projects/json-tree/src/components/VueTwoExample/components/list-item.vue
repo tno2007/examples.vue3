@@ -27,8 +27,8 @@ const makeFolder = () => {
 </script>
 
 <template>
-  <div class="list-item-content">
-    {{ props.item?.name }}
+  <div class="list-item-content" :class="props.item.class">
+    <slot>{{ props.item?.name }}</slot>
   </div>
 </template>
 
