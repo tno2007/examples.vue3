@@ -14,10 +14,16 @@ const props = defineProps({
       return [];
     },
   },
+  parentIndex: {
+    type: Number,
+    required: false
+  }
 });
 
 const count = ref(0);
-const uniqueId = () => `id${++count.value}`;
+//const uniqueId = (value: number) => `id${count.value++}`;
+
+const uniqueId = (index: number, parentIndex: number) => `${index}`;
 
 const treeItems = computed(() => props.items);
 </script>
@@ -26,13 +32,14 @@ const treeItems = computed(() => props.items);
   <ul class="list">
     <li
       class="list-item"
-      v-for="item in treeItems"
+      v-for="(item, index) in treeItems"
       :key="item.id"
-      :id="item.id || uniqueId()"
+      :data-index="item.id || uniqueId(index)"
+      :data-parent-index="parentIndex"
     >
       <list-item :item="item"></list-item>
-      <div class="child" v-if="item.children && item.children.length > 0">
-        <list :items="item.children"></list>
+      <div class="children" v-if="item.children && item.children.length > 0">
+        <list :items="item.children" :parentIndex="index"></list>
       </div>
     </li>
   </ul>

@@ -5,11 +5,30 @@ import VueTwoExample from "./components/VueTwoExample/VueTwoExample.vue";
 </script>
 
 <template>
+  
+  <!--
   <h1>Vue3TreeVue</h1>
   <Vue3TreeVue></Vue3TreeVue>
   <hr />
+  -->
   <h1>VueTwoExample</h1>
-  <VueTwoExample></VueTwoExample>
+  <VueTwoExample>
+    Hello
+  </VueTwoExample>
 </template>
 
-<style scoped></style>
+<style>
+
+.red {
+  color: red;
+}
+
+.blue {
+  color: blue;
+}
+
+.green {
+  color: green;
+}
+
+</style>
