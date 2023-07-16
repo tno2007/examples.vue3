@@ -1,0 +1,1 @@
+pnpm vite ./src/projects/vue-slots

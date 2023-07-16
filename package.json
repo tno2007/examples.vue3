@@ -13,7 +13,8 @@
     "lead-form:dev": "scripty",
     "explore-lite:dev": "scripty",
     "json-tree": "pnpm vite ./src/projects/json-tree",
-    "new": "scripty"
+    "new": "scripty",
+    "vue-slots": "scripty"
   },
   "dependencies": {
     "@ditdot-dev/vue-flow-form": "^2.3.2",

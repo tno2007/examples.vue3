@@ -20,12 +20,24 @@ if (name.Contains(" "))
 }
 
 var projectsPath = Path.Combine(packageRoot, Path.Join("src", "projects"));
+var scritpsPath = Path.Combine(packageRoot, Path.Join("scripts");
 var source = Path.Combine(projectsPath, "_project-template");
 var destination = Path.Combine(projectsPath, name);
 
-Console.WriteLine($"Creating new node package '{name}'");
-CopyDirectory(source, destination, true);
 
+if (!Directory.Exists(destination))
+{
+    Console.WriteLine($"Creating new node package '{name}'");
+    CopyDirectory(source, destination, true);
+}
+else
+{
+    Console.WriteLine($"Node package project folder '{name}', already exist");
+}
+
+// TODO: Add scripts folder package entry
+// File.WriteAllText()
+// pnpm vite ./src/projects/vue-slots
 
 static void CopyDirectory(string sourceDir, string destinationDir, bool recursive)
 {
