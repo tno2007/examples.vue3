@@ -9,9 +9,11 @@ import Sample from "./components/ListTree/Sample.vue";
 <template>
   <div>
     <div
-      class="bg-gray-600 flex-col flex-auto h-full w-72 text-light-50 top-0 left-0"
+      class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform ---translate-x-full --sm:translate-x-0"
     >
-      <Sample></Sample>
+      <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+        <Sample />
+      </div>
     </div>
   </div>
 </template>

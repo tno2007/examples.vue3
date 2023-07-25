@@ -21,14 +21,19 @@ const props = defineProps({
   },
 });
 
+const propSettings = ref({});
+
 const level = ref(0);
 
 const slots = useSlots();
+
+console.log(slots);
 
 level.value = props.level;
 </script>
 
 <template>
+  {{ propSettings }}
   <ul :class="props.ulClass">
     <li :class="props.liClass" v-for="(item, i) in props.items" :key="i">
       <ListItem :item="item" :level="level">
