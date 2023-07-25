@@ -17,8 +17,6 @@ const level = ref(0);
 level.value = props.level;
 
 const slots = useSlots();
-
-console.log(Object.keys(slots));
 </script>
 
 <template>

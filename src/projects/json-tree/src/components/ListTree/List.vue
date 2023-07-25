@@ -11,6 +11,14 @@ const props = defineProps({
     type: Number,
     default: 1,
   },
+  ulClass: {
+    type: String,
+    default: null,
+  },
+  liClass: {
+    type: String,
+    default: null,
+  },
 });
 
 const level = ref(0);
@@ -21,15 +29,20 @@ level.value = props.level;
 </script>
 
 <template>
-  <ul>
-    <li v-for="(item, i) in props.items" :key="i">
+  <ul :class="props.ulClass">
+    <li :class="props.liClass" v-for="(item, i) in props.items" :key="i">
       <ListItem :item="item" :level="level">
         <template v-for="(_, slot) in $slots" :key="slot" #[slot]>
           <slot :name="slot">default value B</slot>
         </template>
       </ListItem>
       <template v-if="item.children && item.children.length > 0">
-        <List :items="item.children" :level="level + 1">
+        <List
+          :ul-class="props.ulClass"
+          :li-class="props.liClass"
+          :items="item.children"
+          :level="level + 1"
+        >
           <template v-for="(_, slot) in $slots" :key="slot" #[slot]>
             <slot :name="slot">default value B</slot>
           </template>

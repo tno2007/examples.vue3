@@ -7,37 +7,13 @@ import Sample from "./components/ListTree/Sample.vue";
 </script>
 
 <template>
-  <Sample></Sample>
-  <!--
-  <h1>Vue3TreeVue</h1>
-  <Vue3TreeVue></Vue3TreeVue>
-  <hr />
-  -->
-
-  <VueTwoExample />
-
-  <br />
-  <hr />
-  <br />
-
-  <h1>SimpleSlot</h1>
-  <SimpleSlot>
-    <template #level-1>top level content - example L1</template>
-    <template #level-2>top level content - example L2</template>
-    <template #level-3>top level content - example L3</template>
-  </SimpleSlot>
+  <div>
+    <div
+      class="bg-gray-600 flex-col flex-auto h-full w-72 text-light-50 top-0 left-0"
+    >
+      <Sample></Sample>
+    </div>
+  </div>
 </template>
 
-<style>
-.red {
-  color: red;
-}
-
-.blue {
-  color: blue;
-}
-
-.green {
-  color: green;
-}
-</style>
+<style></style>
