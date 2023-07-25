@@ -3,9 +3,11 @@
 // import Vue3TreeVue from "./components/Vue3TreeVue.vue";
 import VueTwoExample from "./components/VueTwoExample/VueTwoExample.vue";
 import SimpleSlot from "./components/SimpleSlot/SimpleSlot.vue";
+import Sample from "./components/ListTree/Sample.vue";
 </script>
 
 <template>
+  <Sample></Sample>
   <!--
   <h1>Vue3TreeVue</h1>
   <Vue3TreeVue></Vue3TreeVue>
