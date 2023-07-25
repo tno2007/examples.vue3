@@ -1,12 +1,30 @@
 <script setup lang="ts">
-import { computed, reactive } from "vue";
+import { computed, reactive, type PropType, ref } from "vue";
+import { type IListItem } from "./typings";
+
+interface IProps {
+  class: string;
+  name: string;
+  children: any;
+}
 
 const props = defineProps({
-  item: Object,
+  level: Number,
+  item: {
+    type: Object as PropType<IListItem>,
+  },
 });
 
 const data = reactive({
   isOpen: false,
+  item: props.item,
+  level: props.level,
+});
+
+const dataX = ref({
+  isOpen: false,
+  item: props.item,
+  level: props.level,
 });
 
 const isFolder = computed(() => {
@@ -24,12 +42,14 @@ const makeFolder = () => {
     // data.isOpen = true;
   }
 };
+
+const slotName = computed(() => `level${data.level}`);
 </script>
 
 <template>
-  <div class="list-item-content" :class="props.item.class">
-    <slot>{{ props.item?.name }}</slot>
-  </div>
+  <slot :name="slotName" :v-bind="data">
+    <span>[default] {{ data.item?.name }} [{{ slotName }}]</span>
+  </slot>
 </template>
 
 <!-- 

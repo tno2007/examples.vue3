@@ -22,6 +22,8 @@
     "@formkit/themes": "0.17.4",
     "@formkit/vue": "0.17.4",
     "@grapoza/vue-tree": "^5.2.0",
+    "@twind/core": "^1.1.3",
+    "feather-icons": "^4.29.0",
     "fecha": "^4.2.3",
     "get-value": "^3.0.1",
     "pinia": "^2.1.4",
