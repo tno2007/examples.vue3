@@ -6,6 +6,7 @@ import { type IListItem } from "./typings";
 const props = defineProps({
   items: {
     type: Object as PropType<IListItem[]>,
+    default: [],
   },
   level: {
     type: Number,
@@ -18,6 +19,10 @@ const props = defineProps({
   liClass: {
     type: String,
     default: null,
+  },
+  listLevelClasses: {
+    type: Object as PropType<string>,
+    default: "",
   },
 });
 
@@ -33,8 +38,7 @@ level.value = props.level;
 </script>
 
 <template>
-  {{ propSettings }}
-  <ul :class="props.ulClass">
+  <ul :class="props.listLevelClasses">
     <li :class="props.liClass" v-for="(item, i) in props.items" :key="i">
       <ListItem :item="item" :level="level">
         <template v-for="(_, slot) in $slots" :key="slot" #[slot]>

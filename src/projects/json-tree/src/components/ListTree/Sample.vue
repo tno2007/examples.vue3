@@ -7,9 +7,9 @@ import { useAppStore } from "../../stores/app";
 
 const store = useAppStore();
 
-const ListClasses = {
+const listLevelClasses = {
   level1: {
-    ul: "a",
+    ul: "m-0 p-0 list-none",
     li: "b",
   },
   level2: {
@@ -28,8 +28,8 @@ const ListClasses = {
 </script>
 
 <template>
-  <List :items="store.tree" ul-class="m-0 p-0 list-none" li-class="">
-    <template #level1 :levelProps="settings">
+  <List :items="store.tree" list-level-classes="listLevelClasses">
+    <template #level1>
       <button
         type="button"
         class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 bg-none bg-transparent border-none"
