@@ -15,5 +15,8 @@ export default defineConfig({
   },
   server: {
     port: 5175,
+    headers: {
+      //"content-type": "utf-8",
+    },
   },
 });

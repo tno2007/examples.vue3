@@ -1,22 +1,36 @@
 <script setup lang="ts">
 import { ref, type PropType } from "vue";
 import List from "./List.vue";
-import { type IListItem } from "./typings";
+import { type IListItem, type IListLevelStyle } from "./typings";
 
 import { useAppStore } from "../../stores/app";
 
 const store = useAppStore();
 
-const listLevelClasses = {
-  level1: {
-    ul: "m-0 p-0 list-none",
-    li: "b",
+const listLevelStyles: IListLevelStyle[] = [
+  {
+    ul: "bg-red-100 m-0 p-0 list-none",
+    li: "will-apply",
   },
-  level2: {
-    ul: "a",
-    li: "b",
+  {
+    ul: "bg-red-200 m-0 p-0 list-none",
+    li: "li-",
   },
-};
+  {
+    ul: "bg-red-300 m-0 p-0 list-none",
+    li: "li-",
+  },
+  {
+    ul: "bg-red-400 m-0 p-0 list-none",
+    li: "li-",
+  },
+  {
+    ul: "bg-red-500 m-0 p-0 list-none",
+    li: "li-",
+  },
+];
+
+const testVar = "everything thats wrong";
 
 /*
 # TODO
@@ -25,11 +39,30 @@ const listLevelClasses = {
 - I can let Ashley know perhaps by now
 - For later: how will I handle the click events? collapse and expand?
 */
+
+/*
+
+*/
 </script>
 
 <template>
-  <List :items="store.tree" list-level-classes="listLevelClasses">
-    <template #level1>
+  <List
+    :items="store.tree"
+    :list-level-styles="listLevelStyles"
+    :test="testVar"
+  >
+    <template #gimme="slotProps">
+      <h2>Main template</h2>
+      <h3>Blommo</h3>
+      <div
+        class="text-indigo-700 font-bold italic hover:text-rose-700 hover:bg-lime-100 cursor-pointer border-black border-2 border-solid"
+      >
+        {{ slotProps.slotVariable1 }}
+      </div>
+    </template>
+
+    <!--
+    <template #level1="slotProps">
       <button
         type="button"
         class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 bg-none bg-transparent border-none"
@@ -37,18 +70,10 @@ const listLevelClasses = {
         data-collapse-toggle="dropdown-example"
         aria-expanded="false"
       >
-        <svg
-          class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="currentColor"
-          viewBox="0 0 18 21"
-        >
-          <path
-            d="M15 12a1 1 0 0 0 .962-.726l2-7A1 1 0 0 0 17 3H3.77L3.175.745A1 1 0 0 0 2.208 0H1a1 1 0 0 0 0 2h.438l.6 2.255v.019l2 7 .746 2.986A3 3 0 1 0 9 17a2.966 2.966 0 0 0-.184-1h2.368c-.118.32-.18.659-.184 1a3 3 0 1 0 3-3H6.78l-.5-2H15Z"
-          ></path>
-        </svg>
-        <span class="flex-1 ml-3 text-left whitespace-nowrap">E-commerce</span>
+        <i class="fa-solid fa-dice-one"></i>
+        <span class="flex-1 ml-3 text-left whitespace-nowrap">{{
+          slotProps
+        }}</span>
         <svg
           class="w-3 h-3"
           aria-hidden="true"
@@ -74,20 +99,7 @@ const listLevelClasses = {
         data-collapse-toggle="dropdown-example"
         aria-expanded="false"
       >
-        <svg
-          width="20"
-          height="12"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
-            d="M17 7H7V17H17V7ZM4 4V20H20V4H4Z"
-            fill="currentColor"
-          />
-        </svg>
+        <i class="fa-solid fa-dice-two"></i>
         <span class="flex-1 ml-3 text-left whitespace-nowrap">E-commerce</span>
       </button>
     </template>
@@ -99,43 +111,37 @@ const listLevelClasses = {
         data-collapse-toggle="dropdown-example"
         aria-expanded="false"
       >
-        <svg
-          width="20"
-          height="12"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
-            d="M12 17C14.7614 17 17 14.7614 17 12C17 9.23858 14.7614 7 12 7C9.23858 7 7 9.23858 7 12C7 14.7614 9.23858 17 12 17ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20Z"
-            fill="currentColor"
-          />
-        </svg>
+        <i class="fa-solid fa-dice-three"></i>
         <span class="flex-1 ml-3 text-left whitespace-nowrap font-extralight"
           >E-commerce</span
         >
       </button>
     </template>
     <template #level4>
-      <div>
-        <a
-          href="#"
-          class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-10 group hover:bg-gray-100 no-underline bg-none bg-transparent border-none"
-          >Products</a
-        >
-      </div>
+      <button
+        type="button"
+        class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 bg-none bg-transparent border-none"
+        aria-controls="dropdown-example"
+        data-collapse-toggle="dropdown-example"
+        aria-expanded="false"
+      >
+        <i class="fa-solid fa-dice-four"></i>
+        <span class="flex-1 ml-3 text-left whitespace-nowrap">E-commerce</span>
+      </button>
     </template>
     <template #level5>
-      <div>
-        <a
-          href="#"
-          class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-10 group hover:bg-gray-100 no-underline bg-none bg-transparent border-none"
-          >Products</a
-        >
-      </div>
+      <button
+        type="button"
+        class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 bg-none bg-transparent border-none"
+        aria-controls="dropdown-example"
+        data-collapse-toggle="dropdown-example"
+        aria-expanded="false"
+      >
+        <i class="fa-solid fa-dice-five"></i>
+        <span class="flex-1 ml-3 text-left whitespace-nowrap">E-commerce</span>
+      </button>
     </template>
+    -->
   </List>
 </template>
 

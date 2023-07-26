@@ -10,6 +10,10 @@ const props = defineProps({
     type: Number,
     default: 0,
   },
+  test: {
+    type: String,
+    default: "pes2013",
+  },
 });
 
 const level = ref(0);
@@ -17,18 +21,29 @@ const level = ref(0);
 level.value = props.level;
 
 const slots = useSlots();
+
+const var1 = props.test;
+const label = props.item?.name;
 </script>
 
 <template>
+  <slot name="gimme" :slotVariable1="var1" :slotVariable2="label">
+    <h2>Default template</h2>
+    <pre>{{ var1 }}</pre>
+  </slot>
+
+  <!--
   <template v-for="(_, slot) in $slots" :key="slot">
     <template v-if="slot === `level${level}`">
-      <slot :name="slot">default value C</slot>
+      <slot :name="slot" />
     </template>
   </template>
 
   <template v-if="Object.keys(slots).includes(`level${level}`) === false">
     <span>{{ props.item?.name }} ({{ level }})</span>
   </template>
+
+  -->
 </template>
 
 <!--

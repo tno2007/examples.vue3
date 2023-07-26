@@ -22,21 +22,18 @@ export const useAppStore = defineStore("app", () => {
     },
     {
       name: "Services",
-      class: "red",
       children: [
         {
           name: "Immigration",
-          class: "blue",
           children: [
             {
               name: "Onboarding questionnaire xxx",
-              class: "green",
               children: [
                 {
                   name: "Fours is a crime",
                   children: [
                     {
-                      name: "Fiver",
+                      name: "Fiverish",
                     },
                   ],
                 },
