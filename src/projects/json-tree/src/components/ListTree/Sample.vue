@@ -41,16 +41,6 @@ const testVar = "everything thats wrong";
 */
 
 /*
-
-*/
-</script>
-
-<template>
-  <List
-    :items="store.tree"
-    :list-level-styles="listLevelStyles"
-    :test="testVar"
-  >
     <template #gimme="slotProps">
       <h2>Main template</h2>
       <h3>Blommo</h3>
@@ -60,9 +50,12 @@ const testVar = "everything thats wrong";
         {{ slotProps.slotVariable1 }}
       </div>
     </template>
+*/
+</script>
 
-    <!--
-    <template #level1="slotProps">
+<template>
+  <List :items="store.tree" :list-level-styles="listLevelStyles">
+    <template #level1="level1Props">
       <button
         type="button"
         class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 bg-none bg-transparent border-none"
@@ -72,7 +65,7 @@ const testVar = "everything thats wrong";
       >
         <i class="fa-solid fa-dice-one"></i>
         <span class="flex-1 ml-3 text-left whitespace-nowrap">{{
-          slotProps
+          level1Props.slotData.name
         }}</span>
         <svg
           class="w-3 h-3"
@@ -91,7 +84,8 @@ const testVar = "everything thats wrong";
         </svg>
       </button>
     </template>
-    <template #level2>
+
+    <template #level2="level2Props">
       <button
         type="button"
         class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 bg-none bg-transparent border-none"
@@ -100,9 +94,13 @@ const testVar = "everything thats wrong";
         aria-expanded="false"
       >
         <i class="fa-solid fa-dice-two"></i>
-        <span class="flex-1 ml-3 text-left whitespace-nowrap">E-commerce</span>
+        <span class="flex-1 ml-3 text-left whitespace-nowrap">{{
+          level2Props.slotData.name
+        }}</span>
       </button>
     </template>
+    <!--
+
     <template #level3>
       <button
         type="button"

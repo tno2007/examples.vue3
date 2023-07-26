@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { type PropType, ref, useSlots } from "vue";
+import { type PropType, ref, useSlots, reactive } from "vue";
 import ListItem from "./ListItem.vue";
 import { type IListItem, type IListLevelStyle } from "./typings";
 import { computed } from "vue";
+import { INSPECT_MAX_BYTES } from "buffer";
 
 const props = defineProps({
   items: {
@@ -26,10 +27,12 @@ const props = defineProps({
 const propSettings = ref({});
 
 const level = ref(0);
-
-const slots = useSlots();
-
 level.value = props.level;
+
+//const slots = useSlots();
+
+const levelItem = ref({});
+levelItem.value = props.items[level.value - 1];
 
 const levelStyle = (levelNumber: number, element: "ul" | "li") => {
   // const r = Math.random();
@@ -47,13 +50,44 @@ const levelStyle = (levelNumber: number, element: "ul" | "li") => {
   return style[element] || "";
 };
 
-const var1 = props.test;
+const data = reactive({
+  label: levelItem.value,
+});
 </script>
 
 <template>
-  <ListItem :test="props.test">
-    <!-- 
+  <ul :class="levelStyle(level, 'ul')">
+    <li
+      :class="levelStyle(level, 'li')"
+      v-for="(item, i) in props.items"
+      :key="i"
+    >
+      <ListItem :item="item" :level="level">
+        <template v-for="(_, slot) in $slots" :key="slot" #[slot]>
+          <slot :name="slot" :slotData="item" />
+        </template>
+      </ListItem>
+      <template v-if="item.children && item.children.length > 0">
+        <List
+          :items="item.children"
+          :level="level + 1"
+          :list-level-styles="props.listLevelStyles"
+        >
+          <template v-for="(_, slot, index) in $slots" :key="slot" #[slot]>
+            <strong>{{ i }}</strong>
+            <slot :name="slot" :slotData="item.children[index]" />
+          </template>
+        </List>
+      </template>
+      <span>L{{ level }}</span>
+    </li>
+  </ul>
+</template>
 
+<!--
+  <ListItem :test="props.test">
+
+    <br comm='
       www is just a placeholder name
 
       All you are saying is where in this template, 
@@ -64,39 +98,13 @@ const var1 = props.test;
       
       If you want to make use of these variables, 
       you have to target them using the www.propertyName syntax 
-     -->
-    <template #gimme="www">
+    '>
+
+     <template #gimme="www">
       <slot name="gimme" :slotVariable1="var1">
         <h2>Middle template</h2>
         <pre>{{ www.slotVariable1 }}</pre>
       </slot>
     </template>
   </ListItem>
-
-  <!--
-  <ul :class="levelStyle(level, 'ul')">
-    <li
-      :class="levelStyle(level, 'li')"
-      v-for="(item, i) in props.items"
-      :key="i"
-    >
-      <ListItem :item="item" :level="level">
-        <template v-for="(_, slot) in $slots" :key="slot">
-          <slot :name="slot" />
-        </template>
-      </ListItem>
-      <template v-if="item.children && item.children.length > 0">
-        <List
-          :items="item.children"
-          :level="level + 1"
-          :list-level-styles="props.listLevelStyles"
-        >
-          <template v-for="(_, slot) in $slots" :key="slot" #[slot]>
-            <slot :name="slot">default value B</slot>
-          </template>
-        </List>
-      </template>
-    </li>
-  </ul>
   -->
-</template>

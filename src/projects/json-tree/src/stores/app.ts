@@ -27,7 +27,7 @@ export const useAppStore = defineStore("app", () => {
           name: "Immigration",
           children: [
             {
-              name: "Onboarding questionnaire xxx",
+              name: "Onboarding questionnaire",
               children: [
                 {
                   name: "Fours is a crime",
