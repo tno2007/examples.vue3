@@ -14,19 +14,19 @@ const listLevelStyles: IListLevelStyle[] = [
   },
   {
     ul: "bg-red-200 m-0 p-0 list-none",
-    li: "li-",
+    li: "li-2",
   },
   {
     ul: "bg-red-300 m-0 p-0 list-none",
-    li: "li-",
+    li: "li-3",
   },
   {
     ul: "bg-red-400 m-0 p-0 list-none",
-    li: "li-",
+    li: "li-4",
   },
   {
     ul: "bg-red-500 m-0 p-0 list-none",
-    li: "li-",
+    li: "li-5",
   },
 ];
 
