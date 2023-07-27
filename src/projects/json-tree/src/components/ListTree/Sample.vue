@@ -64,9 +64,9 @@ const testVar = "everything thats wrong";
         aria-expanded="false"
       >
         <i class="fa-solid fa-dice-one"></i>
-        <span class="flex-1 ml-3 text-left whitespace-nowrap">{{
-          level1Props.slotData.name
-        }}</span>
+        <span class="flex-1 ml-3 text-left whitespace-nowrap">
+          {{ level1Props }}
+        </span>
         <svg
           class="w-3 h-3"
           aria-hidden="true"
@@ -94,9 +94,9 @@ const testVar = "everything thats wrong";
         aria-expanded="false"
       >
         <i class="fa-solid fa-dice-two"></i>
-        <span class="flex-1 ml-3 text-left whitespace-nowrap">{{
-          level2Props.slotData.name
-        }}</span>
+        <span class="flex-1 ml-3 text-left whitespace-nowrap">
+          {{ level2Props }}
+        </span>
       </button>
     </template>
     <!--

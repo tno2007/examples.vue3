@@ -24,17 +24,14 @@ level.value = props.level;
 const slots = useSlots();
 
 const var1 = props.test;
-const label = props.item?.name;
+// const label = props.item?.name;
 
 const data = reactive({
   label: props.item?.name,
 });
 
-/*
-const data = ref({
-
-})
-*/
+const label = ref(null);
+// label.value = props.item?.name;
 </script>
 
 <template>
@@ -49,8 +46,8 @@ const data = ref({
   <!--  -->
   <template v-for="(_, slot) in $slots" :key="slot">
     <template v-if="slot === `level${level}`">
-      <slot :name="slot" :slotData="data.label">
-        <span>{{ data.label }}</span>
+      <slot :name="slot" :label="data.label">
+        <strong>{{ data.label }}</strong>
       </slot>
     </template>
   </template>

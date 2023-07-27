@@ -2,8 +2,6 @@
 import { type PropType, ref, useSlots, reactive } from "vue";
 import ListItem from "./ListItem.vue";
 import { type IListItem, type IListLevelStyle } from "./typings";
-import { computed } from "vue";
-import { INSPECT_MAX_BYTES } from "buffer";
 
 const props = defineProps({
   items: {
@@ -50,9 +48,7 @@ const levelStyle = (levelNumber: number, element: "ul" | "li") => {
   return style[element] || "";
 };
 
-const data = reactive({
-  label: levelItem.value,
-});
+const label = ref(null);
 </script>
 
 <template>
@@ -63,9 +59,18 @@ const data = reactive({
       :key="i"
     >
       <ListItem :item="item" :level="level">
-        <template v-for="(_, slot) in $slots" :key="slot" #[slot]>
-          <slot :name="slot" :slotData="item" />
+        <template #level1>
+          <slot name="level1" :label="item.name"></slot>
         </template>
+        <template #level2>
+          <slot name="level2" :label="item.name"></slot>
+        </template>
+
+        <!--
+        <template v-for="(_, slot) in $slots" :key="slot" #[slot]="slotData">
+          <slot :name="slot" :data="slotData" />
+        </template>
+        -->
       </ListItem>
       <template v-if="item.children && item.children.length > 0">
         <List
@@ -73,13 +78,13 @@ const data = reactive({
           :level="level + 1"
           :list-level-styles="props.listLevelStyles"
         >
-          <template v-for="(_, slot, index) in $slots" :key="slot" #[slot]>
-            <strong>{{ i }}</strong>
-            <slot :name="slot" :slotData="item.children[index]" />
+          <!--
+                    <template v-for="(_, slot) in $slots" :key="slot" #[slot]>
+            <slot :name="slot" />
           </template>
+        -->
         </List>
       </template>
-      <span>L{{ level }}</span>
     </li>
   </ul>
 </template>
