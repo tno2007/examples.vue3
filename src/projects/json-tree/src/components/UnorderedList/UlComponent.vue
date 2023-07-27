@@ -24,10 +24,16 @@ const props = defineProps({
 
 const listLevel = ref(0);
 listLevel.value = props.level;
+
+const levelStyle = (levelNumber: number, element: "ul" | "li") => {
+  let style = props.listLevelStyles[levelNumber - 1];
+  if (!style) return;
+  return style[element] || "";
+};
 </script>
 
 <template>
-  <ul>
+  <ul :class="levelStyle(level, 'ul')">
     <LiComponent v-for="i in items" :item="i" :level="listLevel">
       <template v-for="(_, slot) in $slots" :key="slot" #[slot]="props">
         <slot :name="slot" v-bind="props" />
