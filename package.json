@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "scripts": {
     "create-project": "scripty",
-    "dev": "vite",
     "build": "run-p type-check build-only",
     "preview": "vite preview --port 4173",
     "test:unit": "vitest --environment jsdom",

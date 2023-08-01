@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { useSlots } from "vue";
-import UlComponent from "./UlComponent.vue";
+import UlComponent from "./ul-component.vue";
 import { type PropType } from "vue";
+import type { IListLevelStyle } from "./typings";
+import { getListLevelStyle } from "./common";
 
 const slots = useSlots();
 
@@ -13,11 +15,21 @@ const props = defineProps({
     type: Number,
     default: 1,
   },
+  style: {
+    type: String,
+  },
+  listLevelStyles: {
+    type: Object as PropType<IListLevelStyle[]>,
+    default: [],
+  },
 });
+
+const getStyle = (level: number, element: "ul" | "li") =>
+  getListLevelStyle(props.listLevelStyles, level, element);
 </script>
 
 <template>
-  <li>
+  <li :class="getStyle(props.level, 'li')">
     <template v-for="(_, slot) in $slots" :key="slot">
       <template v-if="slot === `level${level}`">
         <slot :name="slot" :label="item.name">
@@ -31,11 +43,15 @@ const props = defineProps({
     </template>
 
     <template v-if="item.children && item.children.length > 0">
-      <UlComponent :items="item.children" :level="level + 1">
+      <ul-component
+        :items="item.children"
+        :level="level + 1"
+        :list-level-styles="listLevelStyles"
+      >
         <template v-for="(_, slot) of $slots" v-slot:[slot]="props">
           <slot :name="slot" v-bind="props" />
         </template>
-      </UlComponent>
+      </ul-component>
     </template>
   </li>
 </template>

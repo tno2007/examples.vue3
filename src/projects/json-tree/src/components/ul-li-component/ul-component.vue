@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { useSlots, type PropType, ref } from "vue";
+import { type PropType, ref } from "vue";
 import { type IListItem, type IListLevelStyle } from "./typings";
-import LiComponent from "./LiComponent.vue";
+import { getListLevelStyle } from "./common";
+import LiComponent from "./li-component.vue";
 
 const props = defineProps({
   items: {
@@ -16,22 +17,25 @@ const props = defineProps({
     type: Object as PropType<IListLevelStyle[]>,
     default: [],
   },
-  test: {
-    type: String,
-    default: "pes2013",
-  },
 });
 
-const listLevel = ref(0);
-listLevel.value = props.level;
+console.log(props.level);
+
+const getStyle = (level: number, element: "ul" | "li") =>
+  getListLevelStyle(props.listLevelStyles, level, element);
 </script>
 
 <template>
-  <ul>
-    <LiComponent v-for="i in items" :item="i" :level="listLevel">
+  <ul :class="getStyle(props.level, 'ul')">
+    <li-component
+      v-for="i in items"
+      :item="i"
+      :level="props.level"
+      :list-level-styles="props.listLevelStyles"
+    >
       <template v-for="(_, slot) in $slots" :key="slot" #[slot]="props">
         <slot :name="slot" v-bind="props" />
       </template>
-    </LiComponent>
+    </li-component>
   </ul>
 </template>

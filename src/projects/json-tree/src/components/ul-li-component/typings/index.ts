@@ -4,6 +4,6 @@ export interface IListItem {
 }
 
 export interface IListLevelStyle {
-  ul: string;
+  ul?: string;
   li?: string;
 }
