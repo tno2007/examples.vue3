@@ -1,6 +1,6 @@
 import { ref, computed } from "vue";
 import { defineStore } from "pinia";
-import type { IListItem } from "../components/VueTwoExample/components/typings";
+import type { IListItem } from "../components/ul-li-component/typings";
 
 interface ITree {
   name?: string;
@@ -22,6 +22,7 @@ export const useAppStore = defineStore("app", () => {
     },
     {
       name: "Services",
+      //expanded: true,
       children: [
         {
           name: "Immigration",

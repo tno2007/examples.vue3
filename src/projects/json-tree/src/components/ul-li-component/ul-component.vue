@@ -3,6 +3,7 @@ import { type PropType, ref } from "vue";
 import { type IListItem, type IListLevelStyle } from "./typings";
 import { getListLevelStyle } from "./common";
 import LiComponent from "./li-component.vue";
+import { onMounted } from "vue";
 
 const props = defineProps({
   items: {
@@ -19,10 +20,16 @@ const props = defineProps({
   },
 });
 
-console.log(props.level);
-
 const getStyle = (level: number, element: "ul" | "li") =>
   getListLevelStyle(props.listLevelStyles, level, element);
+
+const parsed = props.items.map((i) => {
+  return {
+    ...i,
+    // where expanded is not specified, provide a default
+    expanded: i.expanded || false,
+  };
+});
 </script>
 
 <template>
