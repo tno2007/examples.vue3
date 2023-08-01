@@ -20,7 +20,7 @@ if (name.Contains(" "))
 }
 
 var projectsPath = Path.Combine(packageRoot, Path.Join("src", "projects"));
-var scritpsPath = Path.Combine(packageRoot, Path.Join("scripts");
+var scritpsPath = Path.Combine(packageRoot, Path.Join("scripts"));
 var source = Path.Combine(projectsPath, "_project-template");
 var destination = Path.Combine(projectsPath, name);
 
