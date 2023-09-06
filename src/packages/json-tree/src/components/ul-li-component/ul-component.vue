@@ -35,7 +35,7 @@ const parsed = props.items.map((i) => {
 <template>
   <ul :class="getStyle(props.level, 'ul')">
     <li-component
-      v-for="i in items"
+      v-for="i in props.items"
       :item="i"
       :level="props.level"
       :list-level-styles="props.listLevelStyles"
