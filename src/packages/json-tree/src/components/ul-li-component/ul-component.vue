@@ -34,7 +34,7 @@ const parsed = props.items.map((i) => {
 
 <template>
   <ul :class="getStyle(props.level, 'ul')">
-    <li-component
+    <LiComponent
       v-for="i in props.items"
       :item="i"
       :level="props.level"
@@ -43,6 +43,6 @@ const parsed = props.items.map((i) => {
       <template v-for="(_, slot) in $slots" :key="slot" #[slot]="props">
         <slot :name="slot" v-bind="props" />
       </template>
-    </li-component>
+    </LiComponent>
   </ul>
 </template>

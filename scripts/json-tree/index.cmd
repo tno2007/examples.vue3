@@ -1,1 +1,1 @@
-pnpm vite ./src/projects/json-tree
+pnpm vite ./src/packages/json-tree
