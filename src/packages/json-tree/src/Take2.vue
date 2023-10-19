@@ -3,6 +3,7 @@ import { ref } from "vue";
 import type { IListLevelStyle } from "./components/ul-li-component/typings";
 import UlComponent from "./components/ul-li-component/ul-component.vue";
 import MenuLink from "./MenuLink.vue";
+import NuxtLinkTest from "./NuxtLinkTest.vue";
 
 const menu = ref([
   {
@@ -61,39 +62,33 @@ const listLevelStyles: IListLevelStyle[] = [
 ];
 </script>
 
+
+<!-- 
+
+  Why is the menu link below needed?
+  I thought everything is being done from the json?
+
+-->
+
 <template>
   <UlComponent :items="menu" :list-level-styles="listLevelStyles">
     <template #level1="data">
-      <MenuLink
-        :has-children="data.hasChildren"
-        :label="data.label"
-        :icon="data.icon"
-        :expanded="data.expanded"
-        :level="data.level"
-      ></MenuLink>
+      <MenuLink :has-children="data.hasChildren" :label="data.label" :icon="data.icon" :expanded="data.expanded"
+        :level="data.level">
+        <template #default>
+          <NuxtLinkTest :to="data.label">{{ data.label }}</NuxtLinkTest>
+        </template>
+      </MenuLink>
     </template>
     <template #level2="data">
-      <MenuLink
-        :has-children="data.hasChildren"
-        :label="data.label"
-        :icon="data.icon"
-        :expanded="data.expanded"
-        :level="data.level"
-      ></MenuLink>
+      <MenuLink :has-children="data.hasChildren" :label="data.label" :icon="data.icon" :expanded="data.expanded"
+        :level="data.level"></MenuLink>
     </template>
     <template #level3="data">
-      <MenuLink
-        :has-children="data.hasChildren"
-        :label="data.label"
-        :level="data.level"
-      ></MenuLink>
+      <MenuLink :has-children="data.hasChildren" :label="data.label" :level="data.level"></MenuLink>
     </template>
     <template #level4="data">
-      <MenuLink
-        :has-children="data.hasChildren"
-        :label="data.label"
-        :level="data.level"
-      ></MenuLink>
+      <MenuLink :has-children="data.hasChildren" :label="data.label" :level="data.level"></MenuLink>
     </template>
   </UlComponent>
 </template>
