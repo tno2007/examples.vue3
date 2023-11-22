@@ -14,6 +14,7 @@ const config = defaultConfig({
 
 import "virtual:uno.css";
 
+
 app.use(plugin, config);
 
 app.use(createPinia());
