@@ -41,7 +41,7 @@ app.use(createPinia());
 
 app.component("fa-icon", FontAwesomeIcon);
 
-import { processNode } from "./helpers/nodeRecursion";
+// import { processNode } from "./helpers/nodeRecursion.ts.exclude";
 
 const html = `<body>
   <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
@@ -50,10 +50,12 @@ const html = `<body>
   </p>
 </body>`;
 
-var doc = new DOMParser().parseFromString(html, "text/xml");
+// var doc = new DOMParser().parseFromString(html, "text/xml");
 
-const a = processNode(doc);
+// const a = processNode(doc);
 
-console.log(a);
+// console.log(a);
+
+import '@formkit/themes/genesis'
 
 app.mount("#app");

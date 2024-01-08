@@ -5,7 +5,7 @@ import ListingCard from "./components/ListingCard.vue";
 import ProfileCard from "./components/ProfileCard.vue";
 import { AgGridVue } from "ag-grid-vue3";
 
-const data = ref();
+const data = ref({});
 
 const library = markRaw({
   ListingCard: ListingCard,
@@ -70,6 +70,50 @@ const schema = ref([
   },
 ]);
 
+const options = [
+  {
+    value: 1,
+    label: "They have passed a formal test in English",
+  },
+  {
+    value: 2,
+    label: "They have a degree taught in English",
+  },
+  {
+    value: 3,
+    label:
+      "They are a national of any of the following countries:  Antigua & Barbuda, Australia, The Bahamas, Barbados, Belize, Canada, Dominica, Grenada, Guyana, Jamaica, New Zealand, St Kitts & Nevis St Lucia, Malta, St Vincent & the Grenadines, Trinidad & Tobago or the USA ",
+  },
+];
+
+const schema2 = ref([
+  {
+    $el: "h2",
+    children: "Radio button",
+  },
+  {
+    $formkit: "radio",
+    id: "selection",
+    name: "selection",
+    options,
+  },
+  {
+    $el: "h2",
+    children: "Dropdown",
+  },
+  {
+    $formkit: "select",
+    id: "selection2",
+    name: "selection2",
+    options,
+  },
+  {
+    $formkit: "text",
+    label: "Fill me in",
+    if: "$get(selection).value === 1",
+  },
+]);
+
 // Set rowData to Array of Objects, one Object per Row
 const rowData = reactive({
   value: [],
@@ -110,8 +154,7 @@ onMounted(() => {
 
 <template>
   <div>
-    <ProfileCard></ProfileCard>
-
+    <!--
     <ag-grid-vue
       class="ag-theme-alpine"
       style="height: 500px"
@@ -124,8 +167,12 @@ onMounted(() => {
       @grid-ready="onGridReady"
     >
     </ag-grid-vue>
+    -->
 
-    <FormKitSchema :schema="schema" :data="data" :library="library" />
+    <FormKit type="form" #default="{ value }" :actions="false">
+      <FormKitSchema :schema="schema2" :data="data" :library="library" />
+      <pre v-if="false">{{ value }}</pre>
+    </FormKit>
   </div>
 </template>
 
