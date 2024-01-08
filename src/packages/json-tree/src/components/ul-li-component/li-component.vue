@@ -34,8 +34,17 @@ const getStyle = (level: number, element: "ul" | "li") =>
     <div @click="item.expanded = !item.expanded">
       <template v-for="(_, slot) in $slots" :key="slot">
         <template v-if="slot === `level${level}`">
-          <slot :name="slot" :label="item.name">
-            <strong>{{ item.name }}</strong>
+          <slot
+            :name="slot"
+            :label="item.name"
+            :hasChildren="
+              item.children && item.children.length > 0 ? true : false
+            "
+            :expanded="item.expanded ? true : false"
+            :icon="item.icon"
+            :level="props.level"
+          >
+            <strong>{{ item.name }} {{ props.level }}</strong>
           </slot>
         </template>
       </template>
