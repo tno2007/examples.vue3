@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useIdle } from "@vueuse/core";
+import { watch } from "vue";
 
 const { idle, lastActive } = useIdle(5 * 1000); // 5s
 const { token, lastRefreshedAt, getSession, data, status, signOut } = useAuth();
