@@ -31,7 +31,7 @@ export const processNode = (
     }
 
     if (n.nodeType === 3) {
-      if(tree.le)
+      // if(tree.le)
     }
 
     if (n.nodeType === 1) {
@@ -71,12 +71,12 @@ interface ITreeElement {
 
 
 const parse = (doc, list, e) => {
-var children = e.getChildNodes();
-for (int i = 0; i < children.getLength(); i++) {
+  var children = e.getChildNodes();
+  for (int i = 0; i < children.getLength(); i++) {
   Node n = children.item(i);
-  if (n.getNodeType() == Node.ELEMENT_NODE) {
-    list.add(n.getNodeName());
-    parse(doc, list, (Element) n);
+    if (n.getNodeType() == Node.ELEMENT_NODE) {
+      list.add(n.getNodeName());
+      parse(doc, list, (Element) n);
+    }
   }
-}
 }
