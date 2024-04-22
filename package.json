@@ -17,7 +17,8 @@
     "vue-slots": "scripty",
     "iriesoft": "pnpm vite ./src/projects/iriesoft",
     "lodash-treeshaking": "pnpm vite ./src/packages/lodash-treeshaking",
-    "lodash-treeshaking:build": "pnpm vite build ./src/packages/lodash-treeshaking"
+    "lodash-treeshaking:build": "pnpm vite build ./src/packages/lodash-treeshaking",
+    "package": "scripty"
   },
   "dependencies": {
     "@ditdot-dev/vue-flow-form": "^2.3.2",
