@@ -13,13 +13,3 @@ export default defineConfig({
     },
   },
 });
-
-76EB60B4EDC74AD0
-
-D48KJ8
-
-
-+27 68 216 9050
-
-Finish up to Lab - 
-Deploy host pools and session hosts by using the Azure portal (AD DS)
